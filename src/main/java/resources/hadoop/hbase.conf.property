@@ -1,0 +1,5 @@
+hadoop.home.dir=E:\hadoop
+hbase.zookeeper.master=10.2.70.112:60000
+hbase.zookeeper.quorum=10.2.70.114,10.2.70.115,10.2.70.116
+hbase.zookeeper.clientPort=2181
+

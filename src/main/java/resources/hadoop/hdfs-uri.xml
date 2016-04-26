@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+<root>
+    <upload-property>
+        <name>hdfs-site</name>
+        <value>hdfs://10.2.70.14:8020</value>
+        <property>
+			<name>dfs.namenode.http-address.nn1</name>
+			<value>r101072036.sqa.zmf:8088</value>
+		</property>
+        
+    </upload-property>
+
+    <property>
+        <remote-dir-name>dfs.namenode.name.dir</remote-dir-name>
+        <remote-dir-value>/home/admin/hadoopData/dfs</remote-dir-value>
+        <local-dir-name>local.dir</local-dir-name>
+        <local-dir-value>D:/downloadFile</local-dir-value>
+    </property>
+</root>

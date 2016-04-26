@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<db-config>
+		<type>mysql</type> <!-- oracle/mysql -->
+		<ip>localhost</ip>
+		<port>3306</port>
+		<service>image</service>
+		<username>root</username>
+		<password>000000</password>
+		<initialPoolSize>100</initialPoolSize>
+		<maxPoolSize>500</maxPoolSize>
+		<minPoolSize>50</minPoolSize>
+		<idleTestPeriod>30</idleTestPeriod>
+</db-config>
+
