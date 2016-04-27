@@ -3,11 +3,10 @@ package cn.net.sinodata.cm.util;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-import com.tigera.document.definition.TigEraFileTransfer.EOperType;
-import com.tigera.document.definition.TigEraFileTransfer.MsgBatchInfo;
-
 import cn.net.sinodata.cm.hibernate.po.BatchInfo;
 import cn.net.sinodata.cm.hibernate.po.FileInfo;
+import cn.net.sinodata.cm.pb.ProtoBufInfo.EOperType;
+import cn.net.sinodata.cm.pb.ProtoBufInfo.MsgBatchInfo;
 
 public class OpeMetaFileUtils
 {

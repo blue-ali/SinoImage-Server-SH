@@ -12,11 +12,9 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import com.google.protobuf.ByteString;
-import com.tigera.document.definition.TigEraFileTransfer.EOperType;
-import com.tigera.document.definition.TigEraFileTransfer.MsgFileInfo;
 
-import cn.net.sinodata.cm.common.GlobalVars;
-import cn.net.sinodata.cm.util.DateUtil;
+import cn.net.sinodata.cm.pb.ProtoBufInfo.EOperType;
+import cn.net.sinodata.cm.pb.ProtoBufInfo.MsgFileInfo;
 
 
 @Entity
@@ -50,7 +48,7 @@ public class FileInfo implements Serializable{
     private String lastModTime;
 	@Transient
     /** 版本信息， 用于下载，只能get */
-    private String version;
+    private int version;
 	@Transient
     /** 文件类型 */
     private String mimeType;
@@ -62,7 +60,13 @@ public class FileInfo implements Serializable{
 	private byte[] data;
 	
 	@Transient
+	private String Category;
+	
+	@Transient
 	private EOperType operation;
+	
+	@Transient
+	private boolean uploaded;
 
 	public String getBatchId() {
 		return batchId;
@@ -112,11 +116,11 @@ public class FileInfo implements Serializable{
 		this.lastModTime = lastModTime;
 	}
 
-	public String getVersion() {
+	public int getVersion() {
 		return version;
 	}
 
-	public void setVersion(String version) {
+	public void setVersion(int version) {
 		this.version = version;
 	}
 
@@ -159,6 +163,26 @@ public class FileInfo implements Serializable{
 	public void setOperation(EOperType operation) {
 		this.operation = operation;
 	}
+	
+	public boolean isUploaded() {
+		return uploaded;
+	}
+
+	public void setUploaded(boolean uploaded) {
+		this.uploaded = uploaded;
+	}
+
+	public boolean isNullData(){
+		return data == null || data.length == 0;
+	}
+	
+	public String getCategory() {
+		return Category;
+	}
+
+	public void setCategory(String category) {
+		Category = category;
+	}
 
 	public MsgFileInfo ToPBMsg()
 	{
@@ -172,8 +196,8 @@ public class FileInfo implements Serializable{
 		mBuilder.setFileNO8(this.getFileId());
 		mBuilder.setFileSize10(this.getFileSize());
 //		mBuilder.setFileURLBytes(this.getfile)
-//		mBuilder.setVersion(this.getVersion());
-		
+		mBuilder.setVersion2(this.getVersion());
+		mBuilder.setCategory14(this.getCategory());
 		if (this.getData() != null)	{
 			mBuilder.setData11(ByteString.copyFrom(this.getData()));
 		}
@@ -203,7 +227,8 @@ public class FileInfo implements Serializable{
 		fileInfo.setFileSize(input.getFileSize10());
 //		fileInfo.setLastModTime(input.get);
 		fileInfo.setOperation(input.getOperation12());
-//		fileInfo.setVersion(input.getVersion());
+		fileInfo.setVersion(input.getVersion2());
+		fileInfo.setCategory(input.getCategory14());
 		
 		if (input.getData11() != null)
 		{

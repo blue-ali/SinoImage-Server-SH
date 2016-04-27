@@ -289,7 +289,7 @@ public class EntityUtil {
 					tempDate += " 00:00:00";
 				}
 				try {
-					convertedObj = DateFormatTools.getTime(tempDate).getTime();
+					convertedObj = DateFormatUtil.getTime(tempDate).getTime();
 				} catch (ParseException e) {
 					e.printStackTrace();
 				}
@@ -322,7 +322,7 @@ public class EntityUtil {
 						tempDate += " 00:00:00";
 					}
 					try {
-						tmpl[i] = DateFormatTools.getTime(tempDate).getTime();
+						tmpl[i] = DateFormatUtil.getTime(tempDate).getTime();
 					} catch (ParseException e) {
 						e.printStackTrace();
 					}

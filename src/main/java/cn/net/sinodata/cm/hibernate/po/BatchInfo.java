@@ -14,12 +14,12 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import com.tigera.document.definition.TigEraFileTransfer.EOperType;
-import com.tigera.document.definition.TigEraFileTransfer.MsgBatchInfo;
-import com.tigera.document.definition.TigEraFileTransfer.MsgFileInfo;
-
-import cn.net.sinodata.cm.common.GlobalVars;
-import cn.net.sinodata.cm.util.DateUtil;
+import cn.net.sinodata.cm.pb.ProtoBufInfo.EOperType;
+import cn.net.sinodata.cm.pb.ProtoBufInfo.MsgBatchInfo;
+import cn.net.sinodata.cm.pb.ProtoBufInfo.MsgFileInfo;
+import cn.net.sinodata.cm.util.DateFormatTools;
+import cn.net.sinodata.cm.util.DateFormatUtil;
+import cn.net.sinodata.framework.util.FileUtil;
 
 @Entity
 @Table(name = "cm_batch_info")
@@ -191,15 +191,15 @@ public class BatchInfo implements Serializable {
 		this.version = version;
 	}
 
-	public static BatchInfo FromNetMsg(MsgBatchInfo input) throws ParseException {
+	public static BatchInfo fromNetMsg(MsgBatchInfo input) throws ParseException {
 		BatchInfo batchInfo = new BatchInfo();
 		// ret.setAuthor(input.getAuthor());
 		batchInfo.setBatchId(input.getBatchNO6());
-		//TODO parse date
-		batchInfo.setCreateTime(new Date());
+		batchInfo.setCreateTime(DateFormatUtil.formatIntDate(input.getCreateDate3(), input.getCreateTime4()));
 		batchInfo.setCreator(input.getAuthor1());
 		// batchInfo.setFileIds(input.getfileid);
 //		batchInfo.setLastModified(DateUtil.parse(input.get, GlobalVars.client_date_format));
+		batchInfo.setLastModified(new Date());	//TODO 控件现在不传这个字段，用服务端时间
 		batchInfo.setOrgId(input.getOrgID10());
 		batchInfo.setSourceIp(input.getSourceIP14());
 		batchInfo.setSysId(input.getBusiSysId11());
@@ -219,14 +219,15 @@ public class BatchInfo implements Serializable {
 	public static BatchInfo fromPBFile(String fname) throws Exception {
 		FileInputStream input = new FileInputStream(new File(fname));
 		MsgBatchInfo msg = MsgBatchInfo.parseFrom(input);
-		BatchInfo batchInfo = BatchInfo.FromNetMsg(msg);
+		BatchInfo batchInfo = BatchInfo.fromNetMsg(msg);
 		return batchInfo;
 	}
 
 	public MsgBatchInfo toNetMsg() {
 		MsgBatchInfo.Builder mBuilder = MsgBatchInfo.newBuilder();
 		mBuilder.setBatchNO6(this.getBatchId());
-		mBuilder.setCreateDate3(this.getCreateTime().getDate());
+		mBuilder.setCreateDate3(DateFormatUtil.getIntDateFromDate(this.getCreateTime()));
+		mBuilder.setCreateTime4(DateFormatUtil.getIntTimeFromDate(this.getCreateTime()));
 		mBuilder.setAuthor1(this.getCreator());
 //		mBuilder.setLastModified(DateUtil.format(this.getLastModified(), GlobalVars.client_date_format));
 		mBuilder.setOrgID10(this.getOrgId());
@@ -263,10 +264,14 @@ public class BatchInfo implements Serializable {
 	public Boolean isFileDataComplete() {
 		for (FileInfo fileinfo : this.getFileInfos()) {
 			if (fileinfo.getOperation() == EOperType.eADD || fileinfo.getOperation() == EOperType.eUPD) {
-				if (fileinfo.getData() == null) {
+				if (!fileinfo.isNullData())
+				{
+					continue;
+				}
+				if (fileinfo.isUploaded() != true)
+				{
 					return false;
 				}
-				return true;
 			}
 		}
 		return true;
@@ -289,5 +294,13 @@ public class BatchInfo implements Serializable {
 
 	public void addFileInfo(FileInfo fileInfo) {
 		fileInfos.add(fileInfo);
+	}
+	
+	public void updateFileState(FileInfo _fileInfo){
+		for (FileInfo fileInfo : fileInfos) {
+			if(fileInfo.getFileName().equals(_fileInfo.getFileName())){
+				fileInfo.setUploaded(true);
+			}
+		}
 	}
 }

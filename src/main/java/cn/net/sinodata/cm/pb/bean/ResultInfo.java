@@ -2,8 +2,8 @@ package cn.net.sinodata.cm.pb.bean;
 
 import java.text.ParseException;
 
-import com.tigera.document.definition.TigEraFileTransfer.EResultStatus;
-import com.tigera.document.definition.TigEraFileTransfer.MsgResultInfo;
+import cn.net.sinodata.cm.pb.ProtoBufInfo.EResultStatus;
+import cn.net.sinodata.cm.pb.ProtoBufInfo.MsgResultInfo;
 
 
 public class ResultInfo {

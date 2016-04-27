@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Properties;
 
-import cn.net.sinodata.cm.common.Constant;
+import cn.net.sinodata.cm.common.Constants;
 import cn.net.sinodata.cm.common.GlobalVars;
 import cn.net.sinodata.cm.content.IContentService;
 import cn.net.sinodata.cm.util.SpringUtil;
@@ -49,9 +49,9 @@ public class InitAllConfigService implements InitServiceInteface{
 		GlobalVars.local_root_path = prop.getProperty("local_root_path");
 		String osName = System.getProperty("os.name");
 		if(osName.startsWith("Windows")){
-			GlobalVars.osType = Constant.OS_TYPE_WINDOWS;
+			GlobalVars.osType = Constants.OS_TYPE_WINDOWS;
 		}else if(osName.startsWith("Linux")){
-			GlobalVars.osType = Constant.OS_TYPE_LINUX;
+			GlobalVars.osType = Constants.OS_TYPE_LINUX;
 		}
 	}
 }

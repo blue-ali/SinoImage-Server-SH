@@ -5,7 +5,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import cn.net.sinodata.cm.content.jcr.model.JcrContent;
 import cn.net.sinodata.cm.hibernate.po.BatchInfo;
 import cn.net.sinodata.cm.hibernate.po.FileInfo;
 
@@ -53,7 +52,7 @@ public class BeanUtil {
 		filePO.setFileName(fileInfo.getFileName());
 		return filePO;
 	}
-	
+	/*
 	public static JcrContent fileInfo2JcrContent(FileInfo fileInfo, String batchId, Map<String, byte[]> fileContents){
 		JcrContent jcrContent = new JcrContent();
 		jcrContent.setFileId(fileInfo.getFileId());
@@ -64,8 +63,8 @@ public class BeanUtil {
 		jcrContent.setMimeType(fileInfo.getMimeType());
 		return jcrContent;
 	}
-	
-	public static JcrContent fileInfo2JcrContent(FileInfo fileInfo){
+	*/
+/*	public static JcrContent fileInfo2JcrContent(FileInfo fileInfo){
 		JcrContent jcrContent = new JcrContent();
 		jcrContent.setFileId(fileInfo.getFileId());
 		jcrContent.setFileName(fileInfo.getFileName());
@@ -84,6 +83,6 @@ public class BeanUtil {
 		fileInfo.setLastModTime(jcrContent.getLastModified().getTime().toString());
 		fileInfo.setMimeType(jcrContent.getMimeType());
 		return fileInfo;
-	}
+	}*/
 
 }

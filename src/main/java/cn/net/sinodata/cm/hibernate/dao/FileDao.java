@@ -6,9 +6,8 @@ import java.util.List;
 import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 
-import com.tigera.document.definition.TigEraFileTransfer.EOperType;
-
 import cn.net.sinodata.cm.hibernate.po.FileInfo;
+import cn.net.sinodata.cm.pb.ProtoBufInfo.EOperType;
 
 @Repository
 public class FileDao extends GenericDao<FileInfo>{

@@ -75,13 +75,30 @@ public class FileUtil {
 	public static void byte2file(byte[] buf, String filePath, String fileName) throws IOException {
 		BufferedOutputStream bos = null;
 		FileOutputStream fos = null;
-		File file = null;
 		try {
 			File dir = new File(filePath);
 			if (!dir.exists() && dir.isDirectory()) {
 				dir.mkdirs();
 			}
-			file = new File(filePath + File.separator + fileName);
+			File file = new File(filePath + File.separator + fileName);
+			fos = new FileOutputStream(file);
+			bos = new BufferedOutputStream(fos);
+			bos.write(buf);
+		} finally {
+			if (bos != null) {
+				bos.close();
+			}
+			if (fos != null) {
+				fos.close();
+			}
+		}
+	}
+	
+	public static void byte2file(byte[] buf, String fileName) throws IOException {
+		BufferedOutputStream bos = null;
+		FileOutputStream fos = null;
+		try {
+			File file = new File(fileName);
 			fos = new FileOutputStream(file);
 			bos = new BufferedOutputStream(fos);
 			bos.write(buf);
@@ -97,6 +114,11 @@ public class FileUtil {
 
 	public static void deleteFile(String string) {
 		
+	}
+	
+	public static boolean isFileExists(String path){
+		File file = new File(path);
+		return file.exists();
 	}
 	
 /*	public static String getFileMimeType(File file){

@@ -11,6 +11,8 @@ public interface IContentService {
 	
 	public void addContent(final BatchInfo batchInfo) throws Exception;
 	
+	public void saveContent(final BatchInfo batchInfo) throws Exception;
+	
 	public void updContent(final BatchInfo batchInfo, final List<FileInfo> files) throws Exception;
 	
 	public void delContent(final BatchInfo batchInfo, final List<FileInfo> delFiles) throws Exception;
@@ -27,4 +29,12 @@ public interface IContentService {
 	 * JCR注册节点用
 	 */
 	public void regist();
+
+	/**
+	 * 更新文件内容
+	 * @param batchInfo
+	 * @param fileInfo
+	 * @throws Exception
+	 */
+	void updContent(BatchInfo batchInfo, FileInfo fileInfo) throws Exception;
 }

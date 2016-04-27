@@ -1,25 +1,21 @@
 package cn.net.sinodata.cm.content.fs;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.hadoop.hbase.util.Bytes;
 import org.springframework.stereotype.Service;
 
+import cn.net.sinodata.cm.common.Constants;
 import cn.net.sinodata.cm.content.BaseContent;
 import cn.net.sinodata.cm.content.BaseContentService;
-import cn.net.sinodata.cm.hadoop.hbase.HBaseDao;
-import cn.net.sinodata.cm.hadoop.hbase.HData;
-import cn.net.sinodata.cm.hadoop.hbase.HQuery;
-import cn.net.sinodata.cm.hadoop.hbase.HResult;
 import cn.net.sinodata.cm.hibernate.po.BatchInfo;
 import cn.net.sinodata.cm.hibernate.po.FileInfo;
-import cn.net.sinodata.cm.pb.LogosFileTransfer.EOperType;
+import cn.net.sinodata.cm.pb.ProtoBufInfo.EOperType;
 import cn.net.sinodata.framework.util.FileUtil;
 
 @Service("fsService")
@@ -117,9 +113,9 @@ public class FileSystemServiceImpl extends BaseContentService{
 		EOperType fileOper = fileInfo.getOperation();
 		String fileName = fileInfo.getFileId();
 		byte[] fileData = fileInfo.getData();
-		if (EOperType.UPD.equals(fileOper) || EOperType.ADD.equals(fileOper)) {
+		if (EOperType.eUPD.equals(fileOper) || EOperType.eADD.equals(fileOper)) {
 			FileUtil.byte2file(fileData, path, fileName);
-		} else if (EOperType.DEL.equals(fileOper)) {
+		} else if (EOperType.eDEL.equals(fileOper)) {
 			FileUtil.deleteFile(path + SEPARATOR + fileName);
 		} else {
 			throw new Exception("Unsupported file operation [" + fileOper + "]");
@@ -131,22 +127,17 @@ public class FileSystemServiceImpl extends BaseContentService{
 		String path = buildPath(batchInfo);
 		ensureFolder(path, true);
 		List<FileInfo> fileInfos = batchInfo.getFileInfos();
-//		HBaseDao  dao = new HBaseDao();
-//		List<HData> hdatas = new ArrayList<HData>();
 		for (FileInfo fileInfo : fileInfos) {
 			FileUtil.byte2file(fileInfo.getData(), path, fileInfo.getFileId());
-			
-			//Hbase处理，把二进制数据放到Hbase中
-//			HData hdata = new HData();
-//			hdata.setColumnFamily("F");
-//			hdata.setRowkey(String.valueOf(fileInfo.getFileMd5()));//用MD5做主键
-//			hdata.addKV("fileName", Bytes.toBytes(fileInfo.getFileId()));
-//			hdata.addKV("content", fileInfo.getData());
-//			hdatas.add(hdata);
 		}
-//		dao.upsert("tb_image1", hdatas);
 		
-		
+	}
+	
+	@Override
+	public void updContent(BatchInfo batchInfo, FileInfo fileInfo) throws Exception {
+		String path = buildPath(batchInfo);
+		ensureFolder(path, true);
+		FileUtil.byte2file(fileInfo.getData(), path, fileInfo.getFileId());
 	}
 
 	@Override
@@ -159,5 +150,13 @@ public class FileSystemServiceImpl extends BaseContentService{
 			if(file.exists())
 				file.delete();
 		}
+	}
+
+	@Override
+	public void saveContent(BatchInfo batchInfo) throws Exception {
+		String fileName = getBatchNameNextVersion(batchInfo);
+		// info.RemoveFilesData();
+		byte[] data = batchInfo.toNetMsg().toByteArray();
+		FileUtil.byte2file(data, fileName);
 	}
 }
