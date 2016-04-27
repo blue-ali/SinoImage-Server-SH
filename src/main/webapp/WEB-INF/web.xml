@@ -31,10 +31,7 @@
 		<servlet-name>FileDownload</servlet-name>
 		<servlet-class>com.tigera.document.net.FileDownload</servlet-class>
 	</servlet>
-	<servlet>
-		<servlet-name>FileLength</servlet-name>
-		<servlet-class>com.tigera.document.net.FileGetTransferedLength</servlet-class>
-	</servlet>
+	
 	<servlet>
 		<servlet-name>ServerGetServerList</servlet-name>
 		<servlet-class>com.tigera.document.net.ServerGetServerList</servlet-class>
@@ -48,10 +45,7 @@
 		<servlet-name>FileDownload</servlet-name>
 		<url-pattern>/FileDownload</url-pattern>
 	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>FileLength</servlet-name>
-		<url-pattern>/FileLength</url-pattern>
-	</servlet-mapping>
+	
 	<servlet-mapping>
 		<servlet-name>ServerGetServerList</servlet-name>
 		<url-pattern>/ServerGetServerList</url-pattern>
@@ -60,6 +54,15 @@
 		<servlet-name>ServerGetServerInfo</servlet-name>
 		<url-pattern>/ServerGetServerInfo</url-pattern>
 	</servlet-mapping> -->
+	
+	<servlet>
+		<servlet-name>FileLength</servlet-name>
+		<servlet-class>cn.net.sinodata.cm.controller.FileGetTransferedLength</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>FileLength</servlet-name>
+		<url-pattern>/FileLength</url-pattern>
+	</servlet-mapping>
 	<servlet>
 		<servlet-name>serverGetServerInfo</servlet-name>
 		<servlet-class>com.tigera.document.net.ServerGetServerInfo</servlet-class>

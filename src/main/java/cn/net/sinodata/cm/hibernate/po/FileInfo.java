@@ -43,6 +43,8 @@ public class FileInfo implements Serializable{
 	@Column(name="creator")
     /** 创建者 */
     private String creator;
+	@Column(name="category")
+	private String Category;
 	@Transient
     /** 最后修改时间*/
     private String lastModTime;
@@ -58,9 +60,8 @@ public class FileInfo implements Serializable{
 	@Transient
 	/** 文件内容 */
 	private byte[] data;
-	
 	@Transient
-	private String Category;
+	private String fileUrl;
 	
 	@Transient
 	private EOperType operation;
@@ -183,6 +184,14 @@ public class FileInfo implements Serializable{
 	public void setCategory(String category) {
 		Category = category;
 	}
+	
+	public String getFileUrl() {
+		return fileUrl;
+	}
+
+	public void setFileUrl(String fileUrl) {
+		this.fileUrl = fileUrl;
+	}
 
 	public MsgFileInfo ToPBMsg()
 	{
@@ -196,6 +205,7 @@ public class FileInfo implements Serializable{
 		mBuilder.setFileNO8(this.getFileId());
 		mBuilder.setFileSize10(this.getFileSize());
 //		mBuilder.setFileURLBytes(this.getfile)
+		mBuilder.setFileURL7(this.getFileUrl());
 		mBuilder.setVersion2(this.getVersion());
 		mBuilder.setCategory14(this.getCategory());
 		if (this.getData() != null)	{
@@ -229,7 +239,7 @@ public class FileInfo implements Serializable{
 		fileInfo.setOperation(input.getOperation12());
 		fileInfo.setVersion(input.getVersion2());
 		fileInfo.setCategory(input.getCategory14());
-		
+		fileInfo.setFileUrl(input.getFileURL7());
 		if (input.getData11() != null)
 		{
 			fileInfo.setData(input.getData11().toByteArray());

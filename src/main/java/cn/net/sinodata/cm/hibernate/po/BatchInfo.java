@@ -17,9 +17,7 @@ import javax.persistence.Transient;
 import cn.net.sinodata.cm.pb.ProtoBufInfo.EOperType;
 import cn.net.sinodata.cm.pb.ProtoBufInfo.MsgBatchInfo;
 import cn.net.sinodata.cm.pb.ProtoBufInfo.MsgFileInfo;
-import cn.net.sinodata.cm.util.DateFormatTools;
 import cn.net.sinodata.cm.util.DateFormatUtil;
-import cn.net.sinodata.framework.util.FileUtil;
 
 @Entity
 @Table(name = "cm_batch_info")
@@ -65,6 +63,8 @@ public class BatchInfo implements Serializable {
 	/** 同步时间 **/
 	@Transient
 	private String syncTime;
+	@Transient
+	private String password;
 	/** 包含的文件，用于JCR持久化 */
 	@Transient
 	private List<FileInfo> fileInfos = new ArrayList<FileInfo>();
@@ -190,6 +190,14 @@ public class BatchInfo implements Serializable {
 	public void setVersion(String version) {
 		this.version = version;
 	}
+	
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
 	public static BatchInfo fromNetMsg(MsgBatchInfo input) throws ParseException {
 		BatchInfo batchInfo = new BatchInfo();
@@ -205,6 +213,7 @@ public class BatchInfo implements Serializable {
 		batchInfo.setSysId(input.getBusiSysId11());
 		batchInfo.setOperation(input.getOperation8());
 		batchInfo.setVersion(String.valueOf(input.getVersion2()));
+		batchInfo.setPassword(input.getPassword16());
 		List<MsgFileInfo> mFileInfos = input.getFileinfos9List();
 		if (mFileInfos != null) {
 			for (MsgFileInfo mInfo : mFileInfos) {
@@ -223,13 +232,15 @@ public class BatchInfo implements Serializable {
 		return batchInfo;
 	}
 
-	public MsgBatchInfo toNetMsg() {
+	public MsgBatchInfo toNetMsg() throws ParseException {
 		MsgBatchInfo.Builder mBuilder = MsgBatchInfo.newBuilder();
 		mBuilder.setBatchNO6(this.getBatchId());
 		mBuilder.setCreateDate3(DateFormatUtil.getIntDateFromDate(this.getCreateTime()));
 		mBuilder.setCreateTime4(DateFormatUtil.getIntTimeFromDate(this.getCreateTime()));
 		mBuilder.setAuthor1(this.getCreator());
 //		mBuilder.setLastModified(DateUtil.format(this.getLastModified(), GlobalVars.client_date_format));
+//		mBuilder.setPassword16(this.getPassword());
+		mBuilder.setPassword16("");
 		mBuilder.setOrgID10(this.getOrgId());
 		mBuilder.setBusiSysId11(this.getSysId());
 		mBuilder.setVersion2(Integer.valueOf(this.getVersion()));

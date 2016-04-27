@@ -95,9 +95,14 @@ public class FileUtil {
 	}
 	
 	public static void byte2file(byte[] buf, String fileName) throws IOException {
+		String dirPath = fileName.substring(0, fileName.lastIndexOf(File.separator));
 		BufferedOutputStream bos = null;
 		FileOutputStream fos = null;
 		try {
+			File dir = new File(dirPath);
+			if(!dir.exists()){
+				dir.mkdirs();
+			}
 			File file = new File(fileName);
 			fos = new FileOutputStream(file);
 			bos = new BufferedOutputStream(fos);

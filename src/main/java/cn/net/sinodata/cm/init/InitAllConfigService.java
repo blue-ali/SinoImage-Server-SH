@@ -47,6 +47,7 @@ public class InitAllConfigService implements InitServiceInteface{
 		prop.load(this.getClass().getClassLoader().getResourceAsStream(BASE_CONFIG_PATH + "SinoCM.properties"));
 		GlobalVars.presist_type = prop.getProperty("presistType");
 		GlobalVars.local_root_path = prop.getProperty("local_root_path");
+		GlobalVars.download_url = prop.getProperty("download_url");
 		String osName = System.getProperty("os.name");
 		if(osName.startsWith("Windows")){
 			GlobalVars.osType = Constants.OS_TYPE_WINDOWS;

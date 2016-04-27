@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.hibernate.jdbc.BatchingBatcher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -47,7 +48,7 @@ public class ContentManageServiceImpl extends BaseService implements IContentMan
 		return batchInfo;
 	}
 
-	@Override
+	/*@Override
 	public BatchInfo getBatch(String batchId) throws Exception {
 		// String batchId = batchInfo.getBatchId();
 		BatchInfo batchInfo = batchDao.queryById(batchId);
@@ -73,6 +74,17 @@ public class ContentManageServiceImpl extends BaseService implements IContentMan
 		}
 
 		// contentService.getContent(batchInfo);
+		return batchInfo;
+	}*/
+	
+	@Override
+	public BatchInfo getBatch(String batchId) throws Exception {
+		BatchInfo batchInfo = batchDao.queryById(batchId);
+		List<FileInfo> fileInfos = fileDao.queryListByBatchId(batchId);
+		for (FileInfo fileInfo : fileInfos) {
+			fileInfo.setFileUrl(GlobalVars.download_url + buildRelaPath(batchInfo) + fileInfo.getFileId());
+		}
+		batchInfo.setFileInfos(fileInfos);
 		return batchInfo;
 	}
 
@@ -174,6 +186,27 @@ public class ContentManageServiceImpl extends BaseService implements IContentMan
 		sb.append(oid);
 		sb.append(SEPARATOR);
 		sb.append(batchInfo.getBatchId());
+		return sb.toString();
+	}
+	
+	private String buildRelaPath(BatchInfo batchInfo) {
+		StringBuffer sb = new StringBuffer(SEPARATOR);
+		String sid = batchInfo.getSysId();
+		String oid = batchInfo.getOrgId();
+		if (sid == null || "".equals(sid)) {
+			sid = "1212";
+		}
+		if (oid == null || "".equals(oid)) {
+			oid = "test";
+		}
+		sb.append(sid);
+		sb.append(SEPARATOR);
+		sb.append(DateUtil.format(batchInfo.getCreateTime(), GlobalVars.fs_date_format));
+		sb.append(SEPARATOR);
+		sb.append(oid);
+		sb.append(SEPARATOR);
+		sb.append(batchInfo.getBatchId());
+		sb.append(SEPARATOR);
 		return sb.toString();
 	}
 

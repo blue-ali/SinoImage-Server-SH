@@ -15,8 +15,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import cn.net.sinodata.cm.hibernate.po.BatchInfo;
-import cn.net.sinodata.cm.pb.LogosFileTransfer.EOperType;
-import cn.net.sinodata.cm.pb.LogosFileTransfer.MsgBatchInfo;
+import cn.net.sinodata.cm.pb.ProtoBufInfo.EOperType;
 import cn.net.sinodata.cm.service.IContentManagerService;
 import cn.net.sinodata.framework.log.SinoLogger;
 
@@ -71,7 +70,7 @@ public class GetBatchService extends HttpServlet {
 		try {
 			BatchInfo batchInfo = manageService.getBatch(batchId);
 			if (batchInfo != null) {
-				batchInfo.setOperation(EOperType.FROM_SERVER_NOTCHANGE);
+				batchInfo.setOperation(EOperType.eFROM_SERVER_NOTCHANGE);
 			}
 			batchInfo.toNetMsg().writeTo(response.getOutputStream());
 		} catch (Exception e) {

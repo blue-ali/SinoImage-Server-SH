@@ -129,7 +129,7 @@ public class AddBatchService extends HttpServlet{
 		if (fname.endsWith(OpeMetaFileUtils.PBOPEEXT)) {
 			// pb对象转换为po对象
 			MsgBatchInfo mbatch = MsgBatchInfo.parseFrom(item.getInputStream());
-			BatchInfo batchInfo = BatchInfo.FromNetMsg(mbatch);
+			BatchInfo batchInfo = BatchInfo.fromNetMsg(mbatch);
 			logger.info("获得批次元数据信息, batchId:[" + batchInfo.getBatchId() + "]");
 
 			if (batchInfo.isFileDataComplete()) {	//一次上传所有文件

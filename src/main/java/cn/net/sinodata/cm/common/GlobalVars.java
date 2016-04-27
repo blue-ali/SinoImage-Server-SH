@@ -6,6 +6,7 @@ public class GlobalVars {
 	public static String fs_date_format = "yyyyMMdd";
 	public static String presist_type = "1";
 	public static String local_root_path = "F:\\sinocm-image";
+	public static String download_url = "";
 	public static Object osType = "";
 
 }
