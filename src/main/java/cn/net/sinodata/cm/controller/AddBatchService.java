@@ -72,9 +72,9 @@ public class AddBatchService extends HttpServlet{
 		try {
 			// 解析request请求
 			items = upload.parseRequest(request);
-			Iterator iter = items.iterator();
+			Iterator<FileItem> iter = items.iterator();
 			while (iter.hasNext()) {
-				FileItem item = (FileItem) iter.next();
+				FileItem item = iter.next();
 				if (item != null) {
 					// 表单内容，ignore
 					if (!item.isFormField()) {

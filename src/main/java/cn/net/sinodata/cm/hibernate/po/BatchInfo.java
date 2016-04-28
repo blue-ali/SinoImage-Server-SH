@@ -42,9 +42,6 @@ public class BatchInfo implements Serializable {
 	/** 最后修改时间 */
 	@Column(name = "lastmodified")
 	private Date lastModified;
-	/** 包含的文件，用于文件索引持久化 */
-	@Column(name = "files")
-	private String fileIds;
 	/** 创建人 */
 	@Column(name = "creator")
 	private String creator;
@@ -109,14 +106,6 @@ public class BatchInfo implements Serializable {
 
 	public void setLastModified(Date lastModified) {
 		this.lastModified = lastModified;
-	}
-
-	public String getFileIds() {
-		return fileIds;
-	}
-
-	public void setFileIds(String fileIds) {
-		this.fileIds = fileIds;
 	}
 
 	public String getCreator() {
