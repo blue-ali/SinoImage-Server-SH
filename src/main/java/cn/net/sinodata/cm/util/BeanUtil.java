@@ -1,9 +1,7 @@
 package cn.net.sinodata.cm.util;
 
-import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import cn.net.sinodata.cm.hibernate.po.BatchInfo;
 import cn.net.sinodata.cm.hibernate.po.FileInfo;
@@ -27,7 +25,7 @@ public class BeanUtil {
 				sb.append(",");
 			}
 		}
-		batchPO.setFileIds(sb.toString());
+//		batchPO.setFileIds(sb.toString());
 		return batchPO;
 	}
 	

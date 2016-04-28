@@ -1,7 +1,10 @@
 package cn.net.sinodata.cm.service;
 
+import java.util.List;
+
 import cn.net.sinodata.cm.hibernate.po.BatchInfo;
 import cn.net.sinodata.cm.hibernate.po.FileInfo;
+import cn.net.sinodata.cm.hibernate.po.InvoiceInfo;
 
 public interface IContentManagerService {
 
@@ -46,6 +49,13 @@ public interface IContentManagerService {
 	 * @throws Exception
 	 */
 	public void addFile(BatchInfo batchInfo, FileInfo fileInfo) throws Exception;
+	
+	/**
+	 * 检查发票是否提交过
+	 * @param batchInfo
+	 * @throws Exception
+	 */
+	public List<InvoiceInfo> checkInvoice(BatchInfo batchInfo) throws Exception;
 	
 	public byte[] getContent(BatchInfo batchInfo) throws Exception;
 

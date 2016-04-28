@@ -4,12 +4,11 @@ import javax.annotation.Resource;
 
 import cn.net.sinodata.cm.content.IContentService;
 import cn.net.sinodata.cm.hibernate.dao.BatchDao;
-import cn.net.sinodata.cm.hibernate.dao.CmDao;
 import cn.net.sinodata.cm.hibernate.dao.FileDao;
+import cn.net.sinodata.cm.hibernate.dao.InvoiceDao;
 import cn.net.sinodata.cm.hibernate.po.BatchInfo;
 import cn.net.sinodata.cm.util.Util;
 import cn.net.sinodata.framework.exception.SinoException;
-import cn.net.sinodata.framework.util.StringUtil;
 
 public abstract class BaseService {
 	
@@ -17,8 +16,10 @@ public abstract class BaseService {
 	protected FileDao fileDao;
 	@Resource
 	protected BatchDao batchDao;
+	@Resource
+	protected InvoiceDao invoiceDao;
 //	@Resource
-	protected CmDao cmDao;
+//	protected CmDao cmDao;
 	@Resource
 	protected IContentService contentService;
 

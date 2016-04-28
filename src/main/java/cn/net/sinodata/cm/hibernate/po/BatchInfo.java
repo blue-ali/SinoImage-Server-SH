@@ -18,6 +18,8 @@ import cn.net.sinodata.cm.pb.ProtoBufInfo.EOperType;
 import cn.net.sinodata.cm.pb.ProtoBufInfo.MsgBatchInfo;
 import cn.net.sinodata.cm.pb.ProtoBufInfo.MsgFileInfo;
 import cn.net.sinodata.cm.util.DateFormatUtil;
+import cn.net.sinodata.cm.util.Util;
+import cn.net.sinodata.framework.util.StringUtil;
 
 @Entity
 @Table(name = "cm_batch_info")
@@ -42,9 +44,6 @@ public class BatchInfo implements Serializable {
 	/** 最后修改时间 */
 	@Column(name = "lastmodified")
 	private Date lastModified;
-	/** 包含的文件，用于文件索引持久化 */
-	@Column(name = "files")
-	private String fileIds;
 	/** 创建人 */
 	@Column(name = "creator")
 	private String creator;
@@ -109,14 +108,6 @@ public class BatchInfo implements Serializable {
 
 	public void setLastModified(Date lastModified) {
 		this.lastModified = lastModified;
-	}
-
-	public String getFileIds() {
-		return fileIds;
-	}
-
-	public void setFileIds(String fileIds) {
-		this.fileIds = fileIds;
 	}
 
 	public String getCreator() {
@@ -190,7 +181,7 @@ public class BatchInfo implements Serializable {
 	public void setVersion(String version) {
 		this.version = version;
 	}
-	
+
 	public String getPassword() {
 		return password;
 	}
@@ -206,8 +197,9 @@ public class BatchInfo implements Serializable {
 		batchInfo.setCreateTime(DateFormatUtil.formatIntDate(input.getCreateDate3(), input.getCreateTime4()));
 		batchInfo.setCreator(input.getAuthor1());
 		// batchInfo.setFileIds(input.getfileid);
-//		batchInfo.setLastModified(DateUtil.parse(input.get, GlobalVars.client_date_format));
-		batchInfo.setLastModified(new Date());	//TODO 控件现在不传这个字段，用服务端时间
+		// batchInfo.setLastModified(DateUtil.parse(input.get,
+		// GlobalVars.client_date_format));
+		batchInfo.setLastModified(new Date()); // TODO 控件现在不传这个字段，用服务端时间
 		batchInfo.setOrgId(input.getOrgID10());
 		batchInfo.setSourceIp(input.getSourceIP14());
 		batchInfo.setSysId(input.getBusiSysId11());
@@ -238,8 +230,9 @@ public class BatchInfo implements Serializable {
 		mBuilder.setCreateDate3(DateFormatUtil.getIntDateFromDate(this.getCreateTime()));
 		mBuilder.setCreateTime4(DateFormatUtil.getIntTimeFromDate(this.getCreateTime()));
 		mBuilder.setAuthor1(this.getCreator());
-//		mBuilder.setLastModified(DateUtil.format(this.getLastModified(), GlobalVars.client_date_format));
-//		mBuilder.setPassword16(this.getPassword());
+		// mBuilder.setLastModified(DateUtil.format(this.getLastModified(),
+		// GlobalVars.client_date_format));
+		// mBuilder.setPassword16(this.getPassword());
 		mBuilder.setPassword16("");
 		mBuilder.setOrgID10(this.getOrgId());
 		mBuilder.setBusiSysId11(this.getSysId());
@@ -275,12 +268,10 @@ public class BatchInfo implements Serializable {
 	public Boolean isFileDataComplete() {
 		for (FileInfo fileinfo : this.getFileInfos()) {
 			if (fileinfo.getOperation() == EOperType.eADD || fileinfo.getOperation() == EOperType.eUPD) {
-				if (!fileinfo.isNullData())
-				{
+				if (!fileinfo.isNullData()) {
 					continue;
 				}
-				if (fileinfo.isUploaded() != true)
-				{
+				if (fileinfo.isUploaded() != true) {
 					return false;
 				}
 			}
@@ -306,12 +297,28 @@ public class BatchInfo implements Serializable {
 	public void addFileInfo(FileInfo fileInfo) {
 		fileInfos.add(fileInfo);
 	}
-	
-	public void updateFileState(FileInfo _fileInfo){
+
+	public void updateFileState(FileInfo _fileInfo) {
 		for (FileInfo fileInfo : fileInfos) {
-			if(fileInfo.getFileName().equals(_fileInfo.getFileName())){
+			if (fileInfo.getFileName().equals(_fileInfo.getFileName())) {
 				fileInfo.setUploaded(true);
 			}
 		}
+	}
+
+	public List<InvoiceInfo> getInvoiceInfos() {
+		List<InvoiceInfo> invoiceInfos = new ArrayList<InvoiceInfo>();
+		for (FileInfo fileInfo : fileInfos) {
+			if (!Util.isStrEmpty(fileInfo.getInvoiceNo())) {
+				InvoiceInfo invoiceInfo = new InvoiceInfo();
+				invoiceInfo.setBatchId(fileInfo.getBatchId());
+				invoiceInfo.setAuthor(this.getCreator());
+				invoiceInfo.setCreatetime(this.getCreateTime());
+				invoiceInfo.setFileName(fileInfo.getFileName());
+				invoiceInfo.setInvoiceNo(fileInfo.getInvoiceNo());
+				invoiceInfos.add(invoiceInfo);
+			}
+		}
+		return invoiceInfos;
 	}
 }

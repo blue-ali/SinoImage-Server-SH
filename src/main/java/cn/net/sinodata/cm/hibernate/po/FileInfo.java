@@ -62,9 +62,10 @@ public class FileInfo implements Serializable{
 	private byte[] data;
 	@Transient
 	private String fileUrl;
-	
 	@Transient
 	private EOperType operation;
+	@Transient
+	private String invoiceNo="";
 	
 	@Transient
 	private boolean uploaded;
@@ -192,6 +193,14 @@ public class FileInfo implements Serializable{
 	public void setFileUrl(String fileUrl) {
 		this.fileUrl = fileUrl;
 	}
+	
+	public String getInvoiceNo() {
+		return invoiceNo;
+	}
+
+	public void setInvoiceNo(String invoiceNo) {
+		this.invoiceNo = invoiceNo;
+	}
 
 	public MsgFileInfo ToPBMsg()
 	{
@@ -205,6 +214,7 @@ public class FileInfo implements Serializable{
 		mBuilder.setFileNO8(this.getFileId());
 		mBuilder.setFileSize10(this.getFileSize());
 //		mBuilder.setFileURLBytes(this.getfile)
+		mBuilder.setExFaPiaoCode16(this.getInvoiceNo());
 		mBuilder.setFileURL7(this.getFileUrl());
 		mBuilder.setVersion2(this.getVersion());
 		mBuilder.setCategory14(this.getCategory());
@@ -236,6 +246,7 @@ public class FileInfo implements Serializable{
 		fileInfo.setFileName(input.getFileName6());
 		fileInfo.setFileSize(input.getFileSize10());
 //		fileInfo.setLastModTime(input.get);
+		fileInfo.setInvoiceNo(input.getExFaPiaoCode16());
 		fileInfo.setOperation(input.getOperation12());
 		fileInfo.setVersion(input.getVersion2());
 		fileInfo.setCategory(input.getCategory14());
