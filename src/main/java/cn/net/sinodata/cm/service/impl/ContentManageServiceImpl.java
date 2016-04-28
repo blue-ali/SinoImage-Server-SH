@@ -9,16 +9,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.hibernate.jdbc.BatchingBatcher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import cn.net.sinodata.cm.common.GlobalVars;
-import cn.net.sinodata.cm.hadoop.hbase.HBaseDao;
-import cn.net.sinodata.cm.hadoop.hbase.HQuery;
-import cn.net.sinodata.cm.hadoop.hbase.HResult;
 import cn.net.sinodata.cm.hibernate.po.BatchInfo;
 import cn.net.sinodata.cm.hibernate.po.FileInfo;
+import cn.net.sinodata.cm.hibernate.po.InvoiceInfo;
 import cn.net.sinodata.cm.pb.ProtoBufInfo.EOperType;
 import cn.net.sinodata.cm.service.BaseService;
 import cn.net.sinodata.cm.service.IContentManagerService;
@@ -112,7 +109,6 @@ public class ContentManageServiceImpl extends BaseService implements IContentMan
 
 	@Override
 	public void addBatch(BatchInfo batchInfo) throws Exception {
-		// checkBatch(batchInfo);
 		List<FileInfo> fileInfos = batchInfo.getFileInfos();
 
 		List<FileInfo> delFiles = new ArrayList<FileInfo>();
@@ -126,9 +122,6 @@ public class ContentManageServiceImpl extends BaseService implements IContentMan
 		batchDao.save(batchInfo);
 		fileDao.save(fileInfos);
 		fileDao.delete(delFiles);
-		// if(delFiles.size()>0)
-		// fileDao.delete(delFiles);
-		// fileDao.saveOrDel(fileInfos);
 		contentService.updContent(batchInfo, fileInfos);
 		contentService.delContent(batchInfo, delFiles);
 	}
@@ -136,10 +129,14 @@ public class ContentManageServiceImpl extends BaseService implements IContentMan
 	
 	@Override
 	public void addBatchWithoutData(BatchInfo batchInfo) throws Exception {
-		// checkBatch(batchInfo);
-		//TODO check invoice
+		//check invoice
+		
+		//persist
+		List<InvoiceInfo> invoiceInfos = batchInfo.getInvoiceInfos();
 		batchDao.save(batchInfo);
+		invoiceDao.save(invoiceInfos);
 		contentService.saveContent(batchInfo);
+		
 		//TODO save invoice and notify
 	}
 
@@ -212,12 +209,19 @@ public class ContentManageServiceImpl extends BaseService implements IContentMan
 
 	@Override
 	public void addFile(BatchInfo batchInfo, FileInfo fileInfo) throws Exception {
-		// checkBatch(batchInfo);
-
 		fileDao.save(fileInfo);
 		contentService.updContent(batchInfo, fileInfo);
 		batchInfo.updateFileState(fileInfo);
 	}
 
+	@Override
+	public List<InvoiceInfo> checkInvoice(BatchInfo batchInfo) throws Exception {
+		List<FileInfo> fileInfos = batchInfo.getFileInfos();
+		List<String> invoiceIds= new ArrayList<String>();
+		for (FileInfo fileInfo : fileInfos) {
+			invoiceIds.add(fileInfo.getInvoiceNo());
+		}
+		return invoiceDao.queryListByIds(invoiceIds);
+	}
 
 }

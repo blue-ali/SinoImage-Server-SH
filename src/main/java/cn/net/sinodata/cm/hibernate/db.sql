@@ -3,3 +3,15 @@ CREATE TABLE cm_file_info ( fileid varchar(20) NOT NULL, batchid varchar(50) NOT
 
 DROP TABLE cm_batch_info;
 CREATE TABLE cm_batch_info ( batchid varchar(50) NOT NULL, sysid varchar(20), orgid varchar(20), createtime timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NULL, lastmodified timestamp DEFAULT '0000-00-00 00:00:00' NULL, creator varchar(20), version varchar(10) DEFAULT '""', provincecode varchar(20), PRIMARY KEY (batchid) ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+drop table cm_invoice_info;
+CREATE TABLE
+    cm_invoice_info
+    (
+        invoice_no VARCHAR(20) NOT NULL,
+        filename VARCHAR(20),
+        auther VARCHAR(20),
+        createtime TIMESTAMP NULL,
+        batchid VARCHAR(20),
+        PRIMARY KEY (invoice_no)
+    )
