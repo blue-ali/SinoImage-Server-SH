@@ -31,6 +31,7 @@ import cn.net.sinodata.cm.pb.ProtoBufInfo.MsgFileInfo;
 import cn.net.sinodata.cm.pb.bean.ResultInfo;
 import cn.net.sinodata.cm.service.IContentManagerService;
 import cn.net.sinodata.cm.util.OpeMetaFileUtils;
+import cn.net.sinodata.cm.util.Util;
 import cn.net.sinodata.framework.log.SinoLogger;
 
 /**
@@ -111,7 +112,7 @@ public class AddBatchService extends BaseServletService {
 			} else {
 				// check invoice
 				List<InvoiceInfo> invoiceInfos = manageService.checkInvoice(batchInfo);
-				if (!invoiceInfos.isEmpty()) {
+				if (!Util.isListEmpty(invoiceInfos)) {
 					StringBuilder sb = new StringBuilder();
 					for (InvoiceInfo invoiceInfo : invoiceInfos) {
 						sb.append(String.format("发票号码%s，曾在%s,在批次%s由%s已经提交过\r\n", invoiceInfo.getInvoiceNo(),

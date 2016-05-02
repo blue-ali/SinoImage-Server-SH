@@ -20,6 +20,16 @@ public class DateFormatUtil {
 		public static String NO_SPLIT_SIGN_DATETIME = "yyyyMMddHHmmss";
 		public static String RULE_TIME_DAUFLAT = "yyyy-MM-dd HH:mm:ss";
 		
+		public static Date parseStringDate(String strDate) throws ParseException{
+			SimpleDateFormat sdf = new SimpleDateFormat(RULE_TIME_DAUFLAT);
+			return sdf.parse(strDate);
+		}
+		
+		public static String formatDate(Date date) throws ParseException{
+			SimpleDateFormat sdf = new SimpleDateFormat(RULE_TIME_DAUFLAT);
+			return sdf.format(date);
+		}
+		
 		public static String formatStringDate(String strDate, String fmtFrom, String fmtTo) throws ParseException{
 			SimpleDateFormat sdfFrom = new SimpleDateFormat(fmtFrom);
 			SimpleDateFormat sdfTo = new SimpleDateFormat(fmtTo);

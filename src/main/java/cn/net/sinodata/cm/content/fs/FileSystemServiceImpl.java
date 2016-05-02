@@ -137,7 +137,7 @@ public class FileSystemServiceImpl extends BaseContentService{
 	public void updContent(BatchInfo batchInfo, FileInfo fileInfo) throws Exception {
 		String path = buildPath(batchInfo);
 		ensureFolder(path, true);
-		FileUtil.byte2file(fileInfo.getData(), path, fileInfo.getFileId());
+		FileUtil.byte2file(fileInfo.getData(), path, fileInfo.getFileName());
 	}
 
 	@Override

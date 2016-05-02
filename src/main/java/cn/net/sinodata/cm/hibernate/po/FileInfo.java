@@ -15,6 +15,7 @@ import com.google.protobuf.ByteString;
 
 import cn.net.sinodata.cm.pb.ProtoBufInfo.EOperType;
 import cn.net.sinodata.cm.pb.ProtoBufInfo.MsgFileInfo;
+import cn.net.sinodata.cm.util.DateFormatUtil;
 
 
 @Entity
@@ -40,9 +41,10 @@ public class FileInfo implements Serializable{
 	/** 提交时间 */
 	@Column(name="createtime")
     private Date createTime;
+	/** 创建者 */
 	@Column(name="creator")
-    /** 创建者 */
     private String creator;
+	/** 分类 */
 	@Column(name="category")
 	private String Category;
 	@Transient
@@ -54,8 +56,8 @@ public class FileInfo implements Serializable{
 	@Transient
     /** 文件类型 */
     private String mimeType;
-	@Transient
     /** 影像大小 */
+	@Column(name="filesize")
     private int fileSize;
 	@Transient
 	/** 文件内容 */
@@ -202,12 +204,11 @@ public class FileInfo implements Serializable{
 		this.invoiceNo = invoiceNo;
 	}
 
-	public MsgFileInfo ToPBMsg()
+	public MsgFileInfo ToPBMsg() throws ParseException
 	{
 		MsgFileInfo.Builder mBuilder = MsgFileInfo.newBuilder();
 		mBuilder.setBatchNO13(this.getBatchId());
-		mBuilder.setCreateTime4(this.getCreateTime().getHours());
-		mBuilder.setCreateDate3(this.getCreateTime().getDate());
+		mBuilder.setCreateTime4(DateFormatUtil.formatDate(this.getCreateTime()));
 		mBuilder.setAuthor1(this.getCreator());
 		mBuilder.setFileMD59(this.getFileMd5());
 		mBuilder.setFileName6(this.getFileName());

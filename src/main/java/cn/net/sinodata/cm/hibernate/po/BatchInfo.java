@@ -194,7 +194,7 @@ public class BatchInfo implements Serializable {
 		BatchInfo batchInfo = new BatchInfo();
 		// ret.setAuthor(input.getAuthor());
 		batchInfo.setBatchId(input.getBatchNO6());
-		batchInfo.setCreateTime(DateFormatUtil.formatIntDate(input.getCreateDate3(), input.getCreateTime4()));
+		batchInfo.setCreateTime(DateFormatUtil.parseStringDate(input.getCreateTime4()));
 		batchInfo.setCreator(input.getAuthor1());
 		// batchInfo.setFileIds(input.getfileid);
 		// batchInfo.setLastModified(DateUtil.parse(input.get,
@@ -206,7 +206,7 @@ public class BatchInfo implements Serializable {
 		batchInfo.setOperation(input.getOperation8());
 		batchInfo.setVersion(String.valueOf(input.getVersion2()));
 		batchInfo.setPassword(input.getPassword16());
-		List<MsgFileInfo> mFileInfos = input.getFileinfos9List();
+		List<MsgFileInfo> mFileInfos = input.getFileInfos9List();
 		if (mFileInfos != null) {
 			for (MsgFileInfo mInfo : mFileInfos) {
 				FileInfo fileInfo = FileInfo.FromPBMsg(mInfo);
@@ -227,8 +227,7 @@ public class BatchInfo implements Serializable {
 	public MsgBatchInfo toNetMsg() throws ParseException {
 		MsgBatchInfo.Builder mBuilder = MsgBatchInfo.newBuilder();
 		mBuilder.setBatchNO6(this.getBatchId());
-		mBuilder.setCreateDate3(DateFormatUtil.getIntDateFromDate(this.getCreateTime()));
-		mBuilder.setCreateTime4(DateFormatUtil.getIntTimeFromDate(this.getCreateTime()));
+		mBuilder.setCreateTime4(DateFormatUtil.formatDate(this.getCreateTime()));
 		mBuilder.setAuthor1(this.getCreator());
 		// mBuilder.setLastModified(DateUtil.format(this.getLastModified(),
 		// GlobalVars.client_date_format));
@@ -243,7 +242,7 @@ public class BatchInfo implements Serializable {
 		if (fileInfos != null) {
 			for (FileInfo info : this.fileInfos) {
 				// ret.addFileinfos(info.ToPBMsg());
-				mBuilder.addFileinfos9(info.ToPBMsg());
+				mBuilder.addFileInfos9(info.ToPBMsg());
 			}
 			// mBuilder.setFileCount(fileInfos.size());
 		} else {

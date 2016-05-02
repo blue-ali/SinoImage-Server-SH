@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +21,7 @@ import cn.net.sinodata.cm.pb.ProtoBufInfo.EOperType;
 import cn.net.sinodata.cm.service.BaseService;
 import cn.net.sinodata.cm.service.IContentManagerService;
 import cn.net.sinodata.cm.util.DateUtil;
+import cn.net.sinodata.cm.util.Util;
 import cn.net.sinodata.cm.util.ZipUtil;
 import cn.net.sinodata.framework.exception.SinoException;
 
@@ -79,7 +81,7 @@ public class ContentManageServiceImpl extends BaseService implements IContentMan
 		BatchInfo batchInfo = batchDao.queryById(batchId);
 		List<FileInfo> fileInfos = fileDao.queryListByBatchId(batchId);
 		for (FileInfo fileInfo : fileInfos) {
-			fileInfo.setFileUrl(GlobalVars.download_url + buildRelaPath(batchInfo) + fileInfo.getFileId());
+			fileInfo.setFileUrl(GlobalVars.download_url + buildRelaPath(batchInfo) + fileInfo.getFileName());
 		}
 		batchInfo.setFileInfos(fileInfos);
 		return batchInfo;
@@ -219,7 +221,15 @@ public class ContentManageServiceImpl extends BaseService implements IContentMan
 		List<FileInfo> fileInfos = batchInfo.getFileInfos();
 		List<String> invoiceIds= new ArrayList<String>();
 		for (FileInfo fileInfo : fileInfos) {
-			invoiceIds.add(fileInfo.getInvoiceNo());
+			if(!Util.isStrEmpty(fileInfo.getInvoiceNo()))
+				invoiceIds.add(fileInfo.getInvoiceNo());
+		}
+
+		/*List<String> invoiceIds = fileInfos.stream().filter(n -> Util.isStrEmpty(n.getInvoiceNo()))
+										.map(n -> new String(n.getInvoiceNo()))
+										.collect(Collectors.toList());*/
+		if(Util.isListEmpty(invoiceIds)){
+			return null;
 		}
 		return invoiceDao.queryListByIds(invoiceIds);
 	}

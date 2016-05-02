@@ -80,7 +80,7 @@ public class Util {
 	}
 	
 	public static boolean isListEmpty(List<?> list){
-		if(list != null && list.size() > 0){
+		if(list != null && !list.isEmpty()){
 			return false;
 		}else{
 			return true;
