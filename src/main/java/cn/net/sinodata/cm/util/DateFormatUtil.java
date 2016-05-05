@@ -58,6 +58,19 @@ public class DateFormatUtil {
 			return formatStringDate(strDate, NO_SPLIT_SIGN_DATE, RULE_TIME_DAUFLAT);
 		}
 		
+		/**
+		 * 转为yyyy-MM-dd HH:mm:ss格式日期
+		 * @param intDate
+		 * @param intTime
+		 * @return
+		 * @throws ParseException
+		 */
+		public static Date parseIntDate(int intDate, int intTime) throws ParseException{
+			String strDate = String.valueOf(intDate) + String.valueOf(intTime);
+			SimpleDateFormat sdf = new SimpleDateFormat(NO_SPLIT_SIGN_DATETIME);
+			return sdf.parse(strDate);
+		}
+		
 		
 		/**
 		 * 字符串转化为日期对象

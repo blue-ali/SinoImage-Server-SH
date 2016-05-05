@@ -1,0 +1,143 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+						http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+						http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+						http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd">
+
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:/resources/config/db.properties</value>
+				<value>classpath:/resources/config/jcr.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<context:annotation-config></context:annotation-config>
+	<context:component-scan base-package="cn.net.sinodata.cm"></context:component-scan>
+ 
+	<!-- mysql database 
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass">
+			<value>com.mysql.jdbc.Driver</value>
+		</property>
+		<property name="user">
+			<value>image</value>
+		</property>
+		<property name="password">
+			<value>image</value>
+		</property>
+		<property name="jdbcUrl">
+			<value>jdbc:mysql://localhost/image</value>
+		</property>
+	</bean>-->
+	<!-- orcale database -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass">
+			<value>${jdbc.driver}</value>
+		</property>
+		<property name="user">
+			<value>${jdbc.user}</value>
+		</property>
+		<property name="password">
+			<value>${jdbc.password}</value>
+		</property>
+		<property name="jdbcUrl">
+			<value>${jdbc.url}</value>
+		</property>
+	</bean>
+
+
+	<!-- 数据源 -->
+<!-- 	<bean id="jdbcManagedConnectionFactory" class="org.jencks.tranql.DataSourceMCF">
+		<property name="driverName" value="${jdbc.driver}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="user" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+	</bean> -->
+	
+<!-- 	<bean id="dataSource" class="org.jencks.factory.ConnectionFactoryFactoryBean"  depends-on="jdbcManagedConnectionFactory">
+		<property name="managedConnectionFactory" ref="jdbcManagedConnectionFactory" />
+		<property name="connectionManager">
+			<bean parent="connectionManager" />
+		</property>
+	</bean> -->
+
+	<!-- DB 会话工厂 -->
+<!-- 	<bean id="sessionFactory" -->
+<!-- 		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean"> -->
+<!-- 		<property name="dataSource" ref="dataSource"></property> -->
+<!-- 		<property name="packagesToScan" value="cn.net.sinodata.cm.hibernate.po"></property> -->
+<!-- 	</bean> -->
+	<bean id="txManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<tx:annotation-driven transaction-manager="txManager" />  
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean" >
+
+		<property name="dataSource" ref="dataSource" />
+
+		<property name="packagesToScan">
+			<list>
+				<value>cn.net.sinodata.cm.hibernate.po</value>
+			</list>
+		</property>
+
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.dialect">org.hibernate.dialect.Oracle9Dialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.jdbc.batch_size">5</prop>
+				<prop key="hibernate.use_sql_comments">true</prop>
+				<prop key="hibernate.format_sql">true</prop>
+				<prop key="hibernate.transaction.factory_class">org.springframework.orm.hibernate3.SpringTransactionFactory
+				</prop>
+			<!-- 	<prop key="hibernate.transaction.manager_lookup_class">org.springframework.orm.hibernate3.LocalTransactionManagerLookup
+				</prop> -->
+			</props>
+		</property>
+	</bean>
+	<!--事务管理器-->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+		 
+	<!-- <aop:config>
+		<aop:pointcut id="productServiceMethods"
+			expression="execution(* cn.net.sinodata.cm.service.*.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="productServiceMethods" />
+	</aop:config>-->
+
+	<!--声明事务 -->
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="add*" propagation="REQUIRED" />
+			<tx:method name="append*" propagation="REQUIRED" />
+			<tx:method name="modified*" propagation="REQUIRED" />
+			<tx:method name="delete*" propagation="REQUIRED" />
+			<tx:method name="*" propagation="REQUIRED" read-only="true" />
+		</tx:attributes>
+	</tx:advice> 
+
+	<!-- <bean id="manageService" parent="txProxyTemplate"> -->
+	<!-- <property name="target"> -->
+	<!-- <bean class="cn.net.sinodata.cm.service.impl.ManageServiceImpl"> -->
+	<!-- </bean> -->
+	<!-- </property> -->
+	<!-- </bean> -->
+	
+</beans>

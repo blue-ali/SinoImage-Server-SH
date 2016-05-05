@@ -72,7 +72,7 @@ public class FileSystemServiceImpl extends BaseContentService{
 	private void file2FileInfo(List<FileInfo> fileInfos, List<File> files) throws IOException{
 		Map<String, FileInfo> map = new HashMap<String, FileInfo>();
 		for (FileInfo fileInfo : fileInfos) {
-			map.put(fileInfo.getFileId(), fileInfo);
+			map.put(fileInfo.getFileName(), fileInfo);
 		}
 		for (File file : files) {
 			FileInfo fileInfo = map.get(file.getName());
@@ -128,7 +128,8 @@ public class FileSystemServiceImpl extends BaseContentService{
 		ensureFolder(path, true);
 		List<FileInfo> fileInfos = batchInfo.getFileInfos();
 		for (FileInfo fileInfo : fileInfos) {
-			FileUtil.byte2file(fileInfo.getData(), path, fileInfo.getFileId());
+			if(fileInfo.getOperation() == EOperType.eADD || fileInfo.getOperation() == EOperType.eUPDATEFILE)
+			FileUtil.byte2file(fileInfo.getData(), path, fileInfo.getFileName());
 		}
 		
 	}
@@ -137,16 +138,16 @@ public class FileSystemServiceImpl extends BaseContentService{
 	public void updContent(BatchInfo batchInfo, FileInfo fileInfo) throws Exception {
 		String path = buildPath(batchInfo);
 		ensureFolder(path, true);
-		FileUtil.byte2file(fileInfo.getData(), path, fileInfo.getFileId());
+		FileUtil.byte2file(fileInfo.getData(), path, fileInfo.getFileName());
 	}
 
 	@Override
 	public void delContent(BatchInfo batchInfo, List<FileInfo> delFiles) throws Exception {
 		String path = buildPath(batchInfo);
 		ensureFolder(path, true);
-		List<FileInfo> fileInfos = batchInfo.getFileInfos();
-		for (FileInfo fileInfo : fileInfos) {
-			File file = new File(path + fileInfo.getFileId());
+//		List<FileInfo> fileInfos = batchInfo.getFileInfos();
+		for (FileInfo fileInfo : delFiles) {
+			File file = new File(path + fileInfo.getFileName());
 			if(file.exists())
 				file.delete();
 		}

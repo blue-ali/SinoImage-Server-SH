@@ -47,6 +47,9 @@ public class BatchInfo implements Serializable {
 	/** 创建人 */
 	@Column(name = "creator")
 	private String creator;
+	/** 备注 */
+	@Column(name = "remark")
+	private String remark;
 	/** 来源IP */
 	@Transient
 	private String sourceIp;
@@ -64,12 +67,25 @@ public class BatchInfo implements Serializable {
 	private String syncTime;
 	@Transient
 	private String password;
-	/** 包含的文件，用于JCR持久化 */
+	/** 审核结果  0-通过 1- 2- 3- 4-*/
+	@Column(name="verify_result")
+	private int verifyResult;
+	/** 审核意见 */
+	@Column(name="verify_remark")
+	private String verifyRemark;
+	/** 包含的文件，用于持久化 */
 	@Transient
 	private List<FileInfo> fileInfos = new ArrayList<FileInfo>();
 	@Transient
 	private EOperType operation = EOperType.eFROM_SERVER_NOTCHANGE;
+	/** 待新增发票 */
+	@Transient
+	private List<InvoiceInfo> addInvoiceInfos = new ArrayList<InvoiceInfo>();
 
+	/** 待删除发票 */
+	@Transient
+	private List<InvoiceInfo> delInvoiceInfos = new ArrayList<InvoiceInfo>();
+	
 	public String getBatchId() {
 		return batchId;
 	}
@@ -189,6 +205,44 @@ public class BatchInfo implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	
+
+	public List<InvoiceInfo> getDelInvoiceInfos() {
+		return delInvoiceInfos;
+	}
+
+	public void setDelInvoiceInfos(List<InvoiceInfo> delInvoiceInfos) {
+		this.delInvoiceInfos = delInvoiceInfos;
+	}
+
+	public List<InvoiceInfo> getAddInvoiceInfos() {
+		return addInvoiceInfos;
+	}
+	
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
+	public int getVerifyResult() {
+		return verifyResult;
+	}
+
+	public void setVerifyResult(int verifyResult) {
+		this.verifyResult = verifyResult;
+	}
+
+	public String getVerifyRemark() {
+		return verifyRemark;
+	}
+
+	public void setVerifyRemark(String verifyRemark) {
+		this.verifyRemark = verifyRemark;
+	}
 
 	public static BatchInfo fromNetMsg(MsgBatchInfo input) throws ParseException {
 		BatchInfo batchInfo = new BatchInfo();
@@ -206,11 +260,23 @@ public class BatchInfo implements Serializable {
 		batchInfo.setOperation(input.getOperation8());
 		batchInfo.setVersion(String.valueOf(input.getVersion2()));
 		batchInfo.setPassword(input.getPassword16());
+		batchInfo.setRemark(input.getRemark5());
+		batchInfo.setVerifyResult(input.getExShenheResult19());
+		batchInfo.setVerifyRemark(input.getExShenheRemark20());
+		
 		List<MsgFileInfo> mFileInfos = input.getFileinfos9List();
 		if (mFileInfos != null) {
 			for (MsgFileInfo mInfo : mFileInfos) {
 				FileInfo fileInfo = FileInfo.FromPBMsg(mInfo);
 				batchInfo.getFileInfos().add(fileInfo);
+				
+				if(!Util.isStrEmpty(fileInfo.getInvoiceNo())){
+					if(EOperType.eDEL != fileInfo.getOperation()){
+						batchInfo.getDelInvoiceInfos().add(InvoiceInfo.fromFileInfo(batchInfo, fileInfo));
+					}else{
+						batchInfo.getAddInvoiceInfos().add(InvoiceInfo.fromFileInfo(batchInfo, fileInfo));
+					}
+				}
 			}
 		}
 
@@ -237,6 +303,8 @@ public class BatchInfo implements Serializable {
 		mBuilder.setOrgID10(this.getOrgId());
 		mBuilder.setBusiSysId11(this.getSysId());
 		mBuilder.setVersion2(Integer.valueOf(this.getVersion()));
+		mBuilder.setExShenheResult19(this.getVerifyResult());
+		mBuilder.setExShenheRemark20(this.getVerifyRemark());
 		mBuilder.setOperation8(EOperType.eFROM_SERVER_NOTCHANGE);
 		// mBuilder.setOperation(this.getOperation());
 		List<FileInfo> fileInfos = this.getFileInfos();
@@ -306,19 +374,17 @@ public class BatchInfo implements Serializable {
 		}
 	}
 
-	public List<InvoiceInfo> getInvoiceInfos() {
-		List<InvoiceInfo> invoiceInfos = new ArrayList<InvoiceInfo>();
+	public void updateFileNo() {
+		int last = 0;
 		for (FileInfo fileInfo : fileInfos) {
-			if (!Util.isStrEmpty(fileInfo.getInvoiceNo())) {
-				InvoiceInfo invoiceInfo = new InvoiceInfo();
-				invoiceInfo.setBatchId(fileInfo.getBatchId());
-				invoiceInfo.setAuthor(this.getCreator());
-				invoiceInfo.setCreatetime(this.getCreateTime());
-				invoiceInfo.setFileName(fileInfo.getFileName());
-				invoiceInfo.setInvoiceNo(fileInfo.getInvoiceNo());
-				invoiceInfos.add(invoiceInfo);
+			int fileId = Integer.valueOf(fileInfo.getFileId());
+			if(fileId > last){
+				last = fileId;
+			}else{
+				fileId = last++;
+				fileInfo.setFileId(String.valueOf(fileId));
 			}
 		}
-		return invoiceInfos;
 	}
+
 }

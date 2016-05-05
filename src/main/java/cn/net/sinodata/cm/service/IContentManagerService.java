@@ -58,5 +58,12 @@ public interface IContentManagerService {
 	public List<InvoiceInfo> checkInvoice(BatchInfo batchInfo) throws Exception;
 	
 	public byte[] getContent(BatchInfo batchInfo) throws Exception;
+	
+	/**
+	 * 更新批次审核状态
+	 * @param batchVerifyInfo
+	 * @param fileVerifyInfo
+	 */
+	public void updateBatchVerifyState(String[] batchVerifyInfo, String[] fileVerifyInfo);
 
 }

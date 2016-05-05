@@ -20,7 +20,7 @@ import cn.net.sinodata.cm.common.GlobalVars;
  * @author manan
  *
  */
-//@Service("contentService")
+@Service("contentService")
 public class ProxyContentServiceBean implements FactoryBean<IContentService>, InvocationHandler{
 	
 //	@Resource

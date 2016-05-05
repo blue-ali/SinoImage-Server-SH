@@ -94,9 +94,8 @@ public class AddBatchService extends BaseServletService {
 		}
 	}
 
-	private void processFromUpload(FileItem item, HttpServletResponse hsr) throws Exception {
+	private void processFromUpload(FileItem item, HttpServletResponse hsr) throws Exception{
 		String fname = item.getName();
-
 		fname = fname.substring(fname.lastIndexOf("\\") + 1, fname.length());
 
 		if (fname.endsWith(OpeMetaFileUtils.PBOPEEXT)) {
@@ -120,6 +119,8 @@ public class AddBatchService extends BaseServletService {
 					result.setStatus(EResultStatus.eFailed);
 					result.setMsg(sb.toString());
 				} else {
+					//更新文件序号，现在控件传过来的文件序号有问题
+					batchInfo.updateFileNo();
 					manageService.addBatchWithoutData(batchInfo); // 批次和文件分别上传
 					batchs.put(batchInfo.getBatchId(), batchInfo);
 					result.setStatus(EResultStatus.eSuccess);
@@ -133,7 +134,6 @@ public class AddBatchService extends BaseServletService {
 				logger.info(
 						"获得批次数据信息, batchId:[" + batchInfo.getBatchId() + "], fileId:[" + fileInfo.getFileId() + "]");
 				batchInfo.updateFileData(fileInfo);
-
 				manageService.addFile(batchInfo, fileInfo);
 				if (batchInfo.isFileDataComplete()) {
 					batchs.remove(batchInfo.getBatchId());

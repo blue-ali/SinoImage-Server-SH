@@ -8,7 +8,7 @@ public class FileInfoKey implements Serializable {
 
 	private String batchId;
 
-	private String fileId;
+	private String fileName;
 
 	public FileInfoKey() {
 	}
@@ -21,15 +21,15 @@ public class FileInfoKey implements Serializable {
 		this.batchId = batchId;
 	}
 
-	public String getFileId() {
-		return fileId;
+	public String getFileName() {
+		return fileName;
 	}
 
-	public void setFileId(String fileId) {
-		this.fileId = fileId;
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
 
-	 /** 
+	/** 
      * 覆盖hashCode方法，必须要有 
      */ 
 	@Override
@@ -37,7 +37,7 @@ public class FileInfoKey implements Serializable {
 		final int PRIME = 31;
 		int result = 1;
 		result = PRIME * result + (batchId == null ? 0 : batchId.hashCode());
-		result = PRIME * result + (fileId == null ? 0 : fileId.hashCode());
+		result = PRIME * result + (fileName == null ? 0 : fileName.hashCode());
 		return result;
 	}
 
@@ -54,7 +54,7 @@ public class FileInfoKey implements Serializable {
 			return false;
 		FileInfoKey objKey = (FileInfoKey) obj;
 		if (batchId.equalsIgnoreCase(objKey.batchId)
-				&& fileId.equalsIgnoreCase(objKey.fileId)) {
+				&& fileName.equalsIgnoreCase(objKey.fileName)) {
 			return true;
 		}
 		return false;

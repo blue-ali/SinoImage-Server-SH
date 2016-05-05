@@ -15,6 +15,7 @@ import com.google.protobuf.ByteString;
 
 import cn.net.sinodata.cm.pb.ProtoBufInfo.EOperType;
 import cn.net.sinodata.cm.pb.ProtoBufInfo.MsgFileInfo;
+import cn.net.sinodata.cm.util.DateFormatUtil;
 
 
 @Entity
@@ -43,8 +44,15 @@ public class FileInfo implements Serializable{
 	@Column(name="creator")
     /** 创建者 */
     private String creator;
+	/** 分类信息 */
 	@Column(name="category")
 	private String Category;
+	/** 审核结果 */
+	@Column(name="verify_result")
+	private int verifyResult;
+	/** 审核意见 */
+	@Column(name="verify_remark")
+	private String verifyRemark;
 	@Transient
     /** 最后修改时间*/
     private String lastModTime;
@@ -54,8 +62,8 @@ public class FileInfo implements Serializable{
 	@Transient
     /** 文件类型 */
     private String mimeType;
-	@Transient
     /** 影像大小 */
+	@Column(name="filesize")
     private int fileSize;
 	@Transient
 	/** 文件内容 */
@@ -201,13 +209,29 @@ public class FileInfo implements Serializable{
 	public void setInvoiceNo(String invoiceNo) {
 		this.invoiceNo = invoiceNo;
 	}
+	
+	public int getVerifyResult() {
+		return verifyResult;
+	}
 
-	public MsgFileInfo ToPBMsg()
+	public void setVerifyResult(int verifyResult) {
+		this.verifyResult = verifyResult;
+	}
+
+	public String getVerifyRemark() {
+		return verifyRemark;
+	}
+
+	public void setVerifyRemark(String verifyRemark) {
+		this.verifyRemark = verifyRemark;
+	}
+
+	public MsgFileInfo ToPBMsg() throws ParseException
 	{
 		MsgFileInfo.Builder mBuilder = MsgFileInfo.newBuilder();
 		mBuilder.setBatchNO13(this.getBatchId());
-		mBuilder.setCreateTime4(this.getCreateTime().getHours());
-		mBuilder.setCreateDate3(this.getCreateTime().getDate());
+		mBuilder.setCreateTime4(DateFormatUtil.getIntTimeFromDate(this.getCreateTime()));
+		mBuilder.setCreateDate3(DateFormatUtil.getIntDateFromDate(this.getCreateTime()));
 		mBuilder.setAuthor1(this.getCreator());
 		mBuilder.setFileMD59(this.getFileMd5());
 		mBuilder.setFileName6(this.getFileName());
@@ -218,6 +242,8 @@ public class FileInfo implements Serializable{
 		mBuilder.setFileURL7(this.getFileUrl());
 		mBuilder.setVersion2(this.getVersion());
 		mBuilder.setCategory14(this.getCategory());
+		mBuilder.setExShenheResult19(this.getVerifyResult());
+		mBuilder.setExShenheRemark20(this.getVerifyRemark());
 		if (this.getData() != null)	{
 			mBuilder.setData11(ByteString.copyFrom(this.getData()));
 		}
@@ -239,7 +265,7 @@ public class FileInfo implements Serializable{
 		FileInfo fileInfo = new FileInfo();
 		fileInfo.setBatchId(input.getBatchNO13());
 		//TODO parse date
-		fileInfo.setCreateTime(new Date());
+		fileInfo.setCreateTime(DateFormatUtil.formatIntDate(input.getCreateDate3(), input.getCreateTime4()));
 		fileInfo.setCreator(input.getAuthor1());
 		fileInfo.setFileId(input.getFileNO8());
 		fileInfo.setFileMd5(input.getFileMD59());
@@ -251,6 +277,8 @@ public class FileInfo implements Serializable{
 		fileInfo.setVersion(input.getVersion2());
 		fileInfo.setCategory(input.getCategory14());
 		fileInfo.setFileUrl(input.getFileURL7());
+		fileInfo.setVerifyResult(input.getExShenheResult19());
+		fileInfo.setVerifyRemark(input.getExShenheRemark20());
 		if (input.getData11() != null)
 		{
 			fileInfo.setData(input.getData11().toByteArray());
@@ -263,5 +291,5 @@ public class FileInfo implements Serializable{
 		
 		return fileInfo;
 	}
-	
+
 }

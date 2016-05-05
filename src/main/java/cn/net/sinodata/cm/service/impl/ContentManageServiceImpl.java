@@ -78,10 +78,11 @@ public class ContentManageServiceImpl extends BaseService implements IContentMan
 	public BatchInfo getBatch(String batchId) throws Exception {
 		BatchInfo batchInfo = batchDao.queryById(batchId);
 		List<FileInfo> fileInfos = fileDao.queryListByBatchId(batchId);
-		for (FileInfo fileInfo : fileInfos) {
-			fileInfo.setFileUrl(GlobalVars.download_url + buildRelaPath(batchInfo) + fileInfo.getFileId());
-		}
 		batchInfo.setFileInfos(fileInfos);
+		contentService.getContent(batchInfo);
+		for (FileInfo fileInfo : fileInfos) {
+			fileInfo.setFileUrl(GlobalVars.download_url + buildRelaPath(batchInfo) + fileInfo.getFileName());
+		}
 		return batchInfo;
 	}
 
@@ -122,6 +123,7 @@ public class ContentManageServiceImpl extends BaseService implements IContentMan
 		batchDao.save(batchInfo);
 		fileDao.save(fileInfos);
 		fileDao.delete(delFiles);
+		//TODO 判断操作类型 updatebasic不保存
 		contentService.updContent(batchInfo, fileInfos);
 		contentService.delContent(batchInfo, delFiles);
 	}
@@ -129,12 +131,15 @@ public class ContentManageServiceImpl extends BaseService implements IContentMan
 	
 	@Override
 	public void addBatchWithoutData(BatchInfo batchInfo) throws Exception {
-		//check invoice
-		
+		//重置审核记过
+		resetVerifyState(batchInfo);
 		//persist
-		List<InvoiceInfo> invoiceInfos = batchInfo.getInvoiceInfos();
+		List<InvoiceInfo> addInvoiceInfos = batchInfo.getAddInvoiceInfos();
+		List<InvoiceInfo> delInvoiceInfos = batchInfo.getDelInvoiceInfos();
 		batchDao.save(batchInfo);
-		invoiceDao.save(invoiceInfos);
+		fileDao.save(batchInfo.getFileInfos());
+		invoiceDao.save(addInvoiceInfos);
+		invoiceDao.delete(delInvoiceInfos);
 		contentService.saveContent(batchInfo);
 		
 		//TODO save invoice and notify
@@ -209,7 +214,7 @@ public class ContentManageServiceImpl extends BaseService implements IContentMan
 
 	@Override
 	public void addFile(BatchInfo batchInfo, FileInfo fileInfo) throws Exception {
-		fileDao.save(fileInfo);
+		//fileDao.save(fileInfo);
 		contentService.updContent(batchInfo, fileInfo);
 		batchInfo.updateFileState(fileInfo);
 	}
@@ -219,9 +224,47 @@ public class ContentManageServiceImpl extends BaseService implements IContentMan
 		List<FileInfo> fileInfos = batchInfo.getFileInfos();
 		List<String> invoiceIds= new ArrayList<String>();
 		for (FileInfo fileInfo : fileInfos) {
-			invoiceIds.add(fileInfo.getInvoiceNo());
+			if(EOperType.eDEL != fileInfo.getOperation()){
+				invoiceIds.add(fileInfo.getInvoiceNo());
+			}
 		}
 		return invoiceDao.queryListByIds(invoiceIds);
 	}
 
+	private void resetVerifyState(BatchInfo batchInfo){
+		batchInfo.setVerifyResult(0);
+		batchInfo.setVerifyRemark("");
+		for (FileInfo fileInfo : batchInfo.getFileInfos()) {
+			fileInfo.setVerifyResult(0);
+			fileInfo.setVerifyRemark("");
+		}
+	}
+
+	@Override
+	public void updateBatchVerifyState(String[] batchVerifyInfo, String[] fileVerifyInfos) {
+		String batchId = batchVerifyInfo[0];
+		String batchState = batchVerifyInfo[1];
+		
+		BatchInfo batchInfo = batchDao.queryById(batchId);
+		batchInfo.setVerifyResult(Integer.valueOf(batchState));
+		batchDao.save(batchInfo);
+
+		if(!(fileVerifyInfos.length ==1 && fileVerifyInfos[0].equals(""))){
+			Map<String, Integer> fileVerifyMap = new HashMap<String, Integer>();
+			for (String fileVerifyInfo : fileVerifyInfos) {
+				String[] fileVerify = fileVerifyInfo.split("\\|");
+				fileVerifyMap.put(fileVerify[0], Integer.valueOf(fileVerify[1]));
+			}
+			
+			List<FileInfo> fileInfos = fileDao.queryListByBatchId(batchId);
+			for (FileInfo fileInfo : fileInfos) {
+				String fileId = fileInfo.getFileId();
+				if(fileVerifyMap.keySet().contains(fileId)){
+					fileInfo.setVerifyResult(fileVerifyMap.get(fileInfo.getFileId()));
+				}
+			}
+			fileDao.save(fileInfos);
+		}
+		
+	}
 }

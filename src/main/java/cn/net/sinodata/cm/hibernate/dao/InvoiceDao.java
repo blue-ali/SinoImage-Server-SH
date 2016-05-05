@@ -20,6 +20,12 @@ public class InvoiceDao extends GenericDao<InvoiceInfo>{
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		query.setParameterList("invoiceIds", invoiceIds);
 		return query.list();
-		
+	}
+	
+	public List<InvoiceInfo> queryListByBatchId(String batchId){
+		String hql = "from InvoiceInfo where batchid=?";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		setQueryParams(query, new String[]{batchId});
+		return query.list();
 	}
 }

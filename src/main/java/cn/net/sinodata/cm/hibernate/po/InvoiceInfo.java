@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.jdbc.BatchingBatcher;
+
 /**
  * @author manan
  *
@@ -80,5 +82,14 @@ public class InvoiceInfo implements Serializable {
 	public void setCreatetime(Date createtime) {
 		this.createtime = createtime;
 	}
-	
+
+	public static InvoiceInfo fromFileInfo(BatchInfo batchInfo, FileInfo fileInfo){
+		InvoiceInfo invoiceInfo = new InvoiceInfo();
+		invoiceInfo.setInvoiceNo(fileInfo.getInvoiceNo());
+		invoiceInfo.setBatchId(batchInfo.getBatchId());
+		invoiceInfo.setCreatetime(batchInfo.getCreateTime());
+		invoiceInfo.setFileName(fileInfo.getFileName());
+		invoiceInfo.setAuthor(batchInfo.getCreator());
+		return invoiceInfo;
+	}
 }
