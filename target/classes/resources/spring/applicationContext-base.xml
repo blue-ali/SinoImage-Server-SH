@@ -116,11 +116,11 @@
 	
 	<tx:annotation-driven transaction-manager="transactionManager"/>
 		 
-	<!-- <aop:config>
+	<aop:config>
 		<aop:pointcut id="productServiceMethods"
 			expression="execution(* cn.net.sinodata.cm.service.*.*(..))" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="productServiceMethods" />
-	</aop:config>-->
+	</aop:config>
 
 	<!--声明事务 -->
 	<tx:advice id="txAdvice" transaction-manager="transactionManager">

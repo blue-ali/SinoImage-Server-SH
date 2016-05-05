@@ -54,5 +54,6 @@ public class InitAllConfigService implements InitServiceInteface{
 		}else if(osName.startsWith("Linux")){
 			GlobalVars.osType = Constants.OS_TYPE_LINUX;
 		}
+		GlobalVars.otherSysUrl = prop.getProperty("otherSysUrl");
 	}
 }

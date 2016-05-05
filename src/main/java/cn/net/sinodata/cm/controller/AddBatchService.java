@@ -25,6 +25,7 @@ import org.springframework.stereotype.Controller;
 import cn.net.sinodata.cm.hibernate.po.BatchInfo;
 import cn.net.sinodata.cm.hibernate.po.FileInfo;
 import cn.net.sinodata.cm.hibernate.po.InvoiceInfo;
+import cn.net.sinodata.cm.httpurl.OtherSysUrl;
 import cn.net.sinodata.cm.pb.ProtoBufInfo.EResultStatus;
 import cn.net.sinodata.cm.pb.ProtoBufInfo.MsgBatchInfo;
 import cn.net.sinodata.cm.pb.ProtoBufInfo.MsgFileInfo;
@@ -67,6 +68,7 @@ public class AddBatchService extends BaseServletService {
 
 		List<FileItem> items = null;
 		try {
+			BatchInfo batchInfo = null;
 			// 解析request请求
 			items = upload.parseRequest(request);
 			Iterator<FileItem> iter = items.iterator();
@@ -76,13 +78,19 @@ public class AddBatchService extends BaseServletService {
 					// 表单内容，ignore
 					if (!item.isFormField()) {
 						logger.info("处理传送文件");
-						processFromUpload(item, response);
+						batchInfo = processFromUpload(item, response);
 					}
 				} else {
 					result.setStatus(EResultStatus.eFailed);
 					result.setMsg("解析请求失败，请求中不包含任何对象");
 				}
 
+			}
+			//TODO 失败处理
+			boolean res = OtherSysUrl.sendJunkangUrl(batchInfo.getBatchId(), batchInfo.getFileInfos().size());
+			if(!res){
+				result.setStatus(EResultStatus.eFailed);
+				result.setMsg("提交批次失败: 与费控系统通讯失败");
 			}
 		} catch (Exception e) {
 			result.setStatus(EResultStatus.eFailed);
@@ -94,14 +102,14 @@ public class AddBatchService extends BaseServletService {
 		}
 	}
 
-	private void processFromUpload(FileItem item, HttpServletResponse hsr) throws Exception{
+	private BatchInfo processFromUpload(FileItem item, HttpServletResponse hsr) throws Exception{
 		String fname = item.getName();
 		fname = fname.substring(fname.lastIndexOf("\\") + 1, fname.length());
-
+		BatchInfo batchInfo = null;
 		if (fname.endsWith(OpeMetaFileUtils.PBOPEEXT)) {
 			// pb对象转换为po对象
 			MsgBatchInfo mbatch = MsgBatchInfo.parseFrom(item.getInputStream());
-			BatchInfo batchInfo = BatchInfo.fromNetMsg(mbatch);
+			batchInfo = BatchInfo.fromNetMsg(mbatch);
 			logger.info("获得批次元数据信息, batchId:[" + batchInfo.getBatchId() + "]");
 
 			if (batchInfo.isFileDataComplete()) { // 一次上传所有文件
@@ -129,7 +137,7 @@ public class AddBatchService extends BaseServletService {
 		} else if (fname.endsWith(OpeMetaFileUtils.PBDataExt)) {
 			MsgFileInfo mfileinfo = MsgFileInfo.parseFrom(item.getInputStream());
 			if (batchs.containsKey(mfileinfo.getBatchNO13())) {
-				BatchInfo batchInfo = batchs.get(mfileinfo.getBatchNO13());
+				batchInfo = batchs.get(mfileinfo.getBatchNO13());
 				FileInfo fileInfo = FileInfo.FromPBMsg(mfileinfo);
 				logger.info(
 						"获得批次数据信息, batchId:[" + batchInfo.getBatchId() + "], fileId:[" + fileInfo.getFileId() + "]");
@@ -147,6 +155,7 @@ public class AddBatchService extends BaseServletService {
 			// 上传数据内容不对
 			throw new Exception("上传数据内容的扩展名非" + OpeMetaFileUtils.PBDataExt + "或者" + OpeMetaFileUtils.PBOPEEXT + "服务拒绝");
 		}
+		return batchInfo;
 	}
 
 	/*
