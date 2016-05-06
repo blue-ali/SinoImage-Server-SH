@@ -61,6 +61,14 @@ public final class ProtoBufInfo {
      * </pre>
      */
     eUPDATEFILE(6, 32),
+    /**
+     * <code>eAlreadyDEL = 64;</code>
+     *
+     * <pre>
+     *文件的状态，当从服务
+     * </pre>
+     */
+    eAlreadyDEL(7, 64),
     ;
 
     /**
@@ -107,6 +115,14 @@ public final class ProtoBufInfo {
      * </pre>
      */
     public static final int eUPDATEFILE_VALUE = 32;
+    /**
+     * <code>eAlreadyDEL = 64;</code>
+     *
+     * <pre>
+     *文件的状态，当从服务
+     * </pre>
+     */
+    public static final int eAlreadyDEL_VALUE = 64;
 
 
     public final int getNumber() { return value; }
@@ -120,6 +136,7 @@ public final class ProtoBufInfo {
         case 8: return eUPDNOTE;
         case 16: return eUPDATEBASIC;
         case 32: return eUPDATEFILE;
+        case 64: return eAlreadyDEL;
         default: return null;
       }
     }
@@ -3913,6 +3930,36 @@ public final class ProtoBufInfo {
      */
     com.google.protobuf.ByteString
         getLocalPath21Bytes();
+
+    // optional string ChangeHistory22 = 22;
+    /**
+     * <code>optional string ChangeHistory22 = 22;</code>
+     */
+    boolean hasChangeHistory22();
+    /**
+     * <code>optional string ChangeHistory22 = 22;</code>
+     */
+    java.lang.String getChangeHistory22();
+    /**
+     * <code>optional string ChangeHistory22 = 22;</code>
+     */
+    com.google.protobuf.ByteString
+        getChangeHistory22Bytes();
+
+    // optional string ThumbnailURL23 = 23;
+    /**
+     * <code>optional string ThumbnailURL23 = 23;</code>
+     */
+    boolean hasThumbnailURL23();
+    /**
+     * <code>optional string ThumbnailURL23 = 23;</code>
+     */
+    java.lang.String getThumbnailURL23();
+    /**
+     * <code>optional string ThumbnailURL23 = 23;</code>
+     */
+    com.google.protobuf.ByteString
+        getThumbnailURL23Bytes();
   }
   /**
    * Protobuf type {@code com.TigEra.document.definition.MsgFileInfo}
@@ -4072,6 +4119,16 @@ public final class ProtoBufInfo {
             case 170: {
               bitField0_ |= 0x00040000;
               localPath21_ = input.readBytes();
+              break;
+            }
+            case 178: {
+              bitField0_ |= 0x00080000;
+              changeHistory22_ = input.readBytes();
+              break;
+            }
+            case 186: {
+              bitField0_ |= 0x00100000;
+              thumbnailURL23_ = input.readBytes();
               break;
             }
           }
@@ -4854,6 +4911,92 @@ public final class ProtoBufInfo {
       }
     }
 
+    // optional string ChangeHistory22 = 22;
+    public static final int CHANGEHISTORY22_FIELD_NUMBER = 22;
+    private java.lang.Object changeHistory22_;
+    /**
+     * <code>optional string ChangeHistory22 = 22;</code>
+     */
+    public boolean hasChangeHistory22() {
+      return ((bitField0_ & 0x00080000) == 0x00080000);
+    }
+    /**
+     * <code>optional string ChangeHistory22 = 22;</code>
+     */
+    public java.lang.String getChangeHistory22() {
+      java.lang.Object ref = changeHistory22_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          changeHistory22_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string ChangeHistory22 = 22;</code>
+     */
+    public com.google.protobuf.ByteString
+        getChangeHistory22Bytes() {
+      java.lang.Object ref = changeHistory22_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        changeHistory22_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional string ThumbnailURL23 = 23;
+    public static final int THUMBNAILURL23_FIELD_NUMBER = 23;
+    private java.lang.Object thumbnailURL23_;
+    /**
+     * <code>optional string ThumbnailURL23 = 23;</code>
+     */
+    public boolean hasThumbnailURL23() {
+      return ((bitField0_ & 0x00100000) == 0x00100000);
+    }
+    /**
+     * <code>optional string ThumbnailURL23 = 23;</code>
+     */
+    public java.lang.String getThumbnailURL23() {
+      java.lang.Object ref = thumbnailURL23_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          thumbnailURL23_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string ThumbnailURL23 = 23;</code>
+     */
+    public com.google.protobuf.ByteString
+        getThumbnailURL23Bytes() {
+      java.lang.Object ref = thumbnailURL23_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        thumbnailURL23_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private void initFields() {
       author1_ = "";
       version2_ = 0;
@@ -4875,6 +5018,8 @@ public final class ProtoBufInfo {
       exShenheResult19_ = 0;
       exShenheRemark20_ = "";
       localPath21_ = "";
+      changeHistory22_ = "";
+      thumbnailURL23_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -4998,6 +5143,12 @@ public final class ProtoBufInfo {
       if (((bitField0_ & 0x00040000) == 0x00040000)) {
         output.writeBytes(21, getLocalPath21Bytes());
       }
+      if (((bitField0_ & 0x00080000) == 0x00080000)) {
+        output.writeBytes(22, getChangeHistory22Bytes());
+      }
+      if (((bitField0_ & 0x00100000) == 0x00100000)) {
+        output.writeBytes(23, getThumbnailURL23Bytes());
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -5086,6 +5237,14 @@ public final class ProtoBufInfo {
       if (((bitField0_ & 0x00040000) == 0x00040000)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(21, getLocalPath21Bytes());
+      }
+      if (((bitField0_ & 0x00080000) == 0x00080000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(22, getChangeHistory22Bytes());
+      }
+      if (((bitField0_ & 0x00100000) == 0x00100000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(23, getThumbnailURL23Bytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -5248,6 +5407,10 @@ public final class ProtoBufInfo {
         bitField0_ = (bitField0_ & ~0x00040000);
         localPath21_ = "";
         bitField0_ = (bitField0_ & ~0x00080000);
+        changeHistory22_ = "";
+        bitField0_ = (bitField0_ & ~0x00100000);
+        thumbnailURL23_ = "";
+        bitField0_ = (bitField0_ & ~0x00200000);
         return this;
       }
 
@@ -5361,6 +5524,14 @@ public final class ProtoBufInfo {
           to_bitField0_ |= 0x00040000;
         }
         result.localPath21_ = localPath21_;
+        if (((from_bitField0_ & 0x00100000) == 0x00100000)) {
+          to_bitField0_ |= 0x00080000;
+        }
+        result.changeHistory22_ = changeHistory22_;
+        if (((from_bitField0_ & 0x00200000) == 0x00200000)) {
+          to_bitField0_ |= 0x00100000;
+        }
+        result.thumbnailURL23_ = thumbnailURL23_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -5480,6 +5651,16 @@ public final class ProtoBufInfo {
         if (other.hasLocalPath21()) {
           bitField0_ |= 0x00080000;
           localPath21_ = other.localPath21_;
+          onChanged();
+        }
+        if (other.hasChangeHistory22()) {
+          bitField0_ |= 0x00100000;
+          changeHistory22_ = other.changeHistory22_;
+          onChanged();
+        }
+        if (other.hasThumbnailURL23()) {
+          bitField0_ |= 0x00200000;
+          thumbnailURL23_ = other.thumbnailURL23_;
           onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
@@ -7083,6 +7264,154 @@ public final class ProtoBufInfo {
         return this;
       }
 
+      // optional string ChangeHistory22 = 22;
+      private java.lang.Object changeHistory22_ = "";
+      /**
+       * <code>optional string ChangeHistory22 = 22;</code>
+       */
+      public boolean hasChangeHistory22() {
+        return ((bitField0_ & 0x00100000) == 0x00100000);
+      }
+      /**
+       * <code>optional string ChangeHistory22 = 22;</code>
+       */
+      public java.lang.String getChangeHistory22() {
+        java.lang.Object ref = changeHistory22_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          changeHistory22_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string ChangeHistory22 = 22;</code>
+       */
+      public com.google.protobuf.ByteString
+          getChangeHistory22Bytes() {
+        java.lang.Object ref = changeHistory22_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          changeHistory22_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string ChangeHistory22 = 22;</code>
+       */
+      public Builder setChangeHistory22(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00100000;
+        changeHistory22_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string ChangeHistory22 = 22;</code>
+       */
+      public Builder clearChangeHistory22() {
+        bitField0_ = (bitField0_ & ~0x00100000);
+        changeHistory22_ = getDefaultInstance().getChangeHistory22();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string ChangeHistory22 = 22;</code>
+       */
+      public Builder setChangeHistory22Bytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00100000;
+        changeHistory22_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional string ThumbnailURL23 = 23;
+      private java.lang.Object thumbnailURL23_ = "";
+      /**
+       * <code>optional string ThumbnailURL23 = 23;</code>
+       */
+      public boolean hasThumbnailURL23() {
+        return ((bitField0_ & 0x00200000) == 0x00200000);
+      }
+      /**
+       * <code>optional string ThumbnailURL23 = 23;</code>
+       */
+      public java.lang.String getThumbnailURL23() {
+        java.lang.Object ref = thumbnailURL23_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          thumbnailURL23_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string ThumbnailURL23 = 23;</code>
+       */
+      public com.google.protobuf.ByteString
+          getThumbnailURL23Bytes() {
+        java.lang.Object ref = thumbnailURL23_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          thumbnailURL23_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string ThumbnailURL23 = 23;</code>
+       */
+      public Builder setThumbnailURL23(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00200000;
+        thumbnailURL23_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string ThumbnailURL23 = 23;</code>
+       */
+      public Builder clearThumbnailURL23() {
+        bitField0_ = (bitField0_ & ~0x00200000);
+        thumbnailURL23_ = getDefaultInstance().getThumbnailURL23();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string ThumbnailURL23 = 23;</code>
+       */
+      public Builder setThumbnailURL23Bytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00200000;
+        thumbnailURL23_ = value;
+        onChanged();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:com.TigEra.document.definition.MsgFileInfo)
     }
 
@@ -7186,6 +7515,24 @@ public final class ProtoBufInfo {
      * <code>required int32 Version7 = 7;</code>
      */
     int getVersion7();
+
+    // optional bool NeedThumbnail8 = 8;
+    /**
+     * <code>optional bool NeedThumbnail8 = 8;</code>
+     *
+     * <pre>
+     *是否需要缩略图
+     * </pre>
+     */
+    boolean hasNeedThumbnail8();
+    /**
+     * <code>optional bool NeedThumbnail8 = 8;</code>
+     *
+     * <pre>
+     *是否需要缩略图
+     * </pre>
+     */
+    boolean getNeedThumbnail8();
 
     // optional string SourceIP42 = 42;
     /**
@@ -7331,13 +7678,18 @@ public final class ProtoBufInfo {
               version7_ = input.readInt32();
               break;
             }
-            case 338: {
+            case 64: {
               bitField0_ |= 0x00000080;
+              needThumbnail8_ = input.readBool();
+              break;
+            }
+            case 338: {
+              bitField0_ |= 0x00000100;
               sourceIP42_ = input.readBytes();
               break;
             }
             case 354: {
-              bitField0_ |= 0x00000100;
+              bitField0_ |= 0x00000200;
               machineID44_ = input.readBytes();
               break;
             }
@@ -7601,6 +7953,30 @@ public final class ProtoBufInfo {
       return version7_;
     }
 
+    // optional bool NeedThumbnail8 = 8;
+    public static final int NEEDTHUMBNAIL8_FIELD_NUMBER = 8;
+    private boolean needThumbnail8_;
+    /**
+     * <code>optional bool NeedThumbnail8 = 8;</code>
+     *
+     * <pre>
+     *是否需要缩略图
+     * </pre>
+     */
+    public boolean hasNeedThumbnail8() {
+      return ((bitField0_ & 0x00000080) == 0x00000080);
+    }
+    /**
+     * <code>optional bool NeedThumbnail8 = 8;</code>
+     *
+     * <pre>
+     *是否需要缩略图
+     * </pre>
+     */
+    public boolean getNeedThumbnail8() {
+      return needThumbnail8_;
+    }
+
     // optional string SourceIP42 = 42;
     public static final int SOURCEIP42_FIELD_NUMBER = 42;
     private java.lang.Object sourceIP42_;
@@ -7612,7 +7988,7 @@ public final class ProtoBufInfo {
      * </pre>
      */
     public boolean hasSourceIP42() {
-      return ((bitField0_ & 0x00000080) == 0x00000080);
+      return ((bitField0_ & 0x00000100) == 0x00000100);
     }
     /**
      * <code>optional string SourceIP42 = 42;</code>
@@ -7667,7 +8043,7 @@ public final class ProtoBufInfo {
      * </pre>
      */
     public boolean hasMachineID44() {
-      return ((bitField0_ & 0x00000100) == 0x00000100);
+      return ((bitField0_ & 0x00000200) == 0x00000200);
     }
     /**
      * <code>optional string MachineID44 = 44;</code>
@@ -7719,6 +8095,7 @@ public final class ProtoBufInfo {
       queryTime5_ = 0;
       batchNO6_ = "";
       version7_ = 0;
+      needThumbnail8_ = false;
       sourceIP42_ = "";
       machineID44_ = "";
     }
@@ -7784,9 +8161,12 @@ public final class ProtoBufInfo {
         output.writeInt32(7, version7_);
       }
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
-        output.writeBytes(42, getSourceIP42Bytes());
+        output.writeBool(8, needThumbnail8_);
       }
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        output.writeBytes(42, getSourceIP42Bytes());
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
         output.writeBytes(44, getMachineID44Bytes());
       }
       getUnknownFields().writeTo(output);
@@ -7828,9 +8208,13 @@ public final class ProtoBufInfo {
       }
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(42, getSourceIP42Bytes());
+          .computeBoolSize(8, needThumbnail8_);
       }
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(42, getSourceIP42Bytes());
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(44, getMachineID44Bytes());
       }
@@ -7968,10 +8352,12 @@ public final class ProtoBufInfo {
         bitField0_ = (bitField0_ & ~0x00000020);
         version7_ = 0;
         bitField0_ = (bitField0_ & ~0x00000040);
-        sourceIP42_ = "";
+        needThumbnail8_ = false;
         bitField0_ = (bitField0_ & ~0x00000080);
-        machineID44_ = "";
+        sourceIP42_ = "";
         bitField0_ = (bitField0_ & ~0x00000100);
+        machineID44_ = "";
+        bitField0_ = (bitField0_ & ~0x00000200);
         return this;
       }
 
@@ -8031,9 +8417,13 @@ public final class ProtoBufInfo {
         if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
           to_bitField0_ |= 0x00000080;
         }
-        result.sourceIP42_ = sourceIP42_;
+        result.needThumbnail8_ = needThumbnail8_;
         if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
           to_bitField0_ |= 0x00000100;
+        }
+        result.sourceIP42_ = sourceIP42_;
+        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
+          to_bitField0_ |= 0x00000200;
         }
         result.machineID44_ = machineID44_;
         result.bitField0_ = to_bitField0_;
@@ -8081,13 +8471,16 @@ public final class ProtoBufInfo {
         if (other.hasVersion7()) {
           setVersion7(other.getVersion7());
         }
+        if (other.hasNeedThumbnail8()) {
+          setNeedThumbnail8(other.getNeedThumbnail8());
+        }
         if (other.hasSourceIP42()) {
-          bitField0_ |= 0x00000080;
+          bitField0_ |= 0x00000100;
           sourceIP42_ = other.sourceIP42_;
           onChanged();
         }
         if (other.hasMachineID44()) {
-          bitField0_ |= 0x00000100;
+          bitField0_ |= 0x00000200;
           machineID44_ = other.machineID44_;
           onChanged();
         }
@@ -8541,6 +8934,55 @@ public final class ProtoBufInfo {
         return this;
       }
 
+      // optional bool NeedThumbnail8 = 8;
+      private boolean needThumbnail8_ ;
+      /**
+       * <code>optional bool NeedThumbnail8 = 8;</code>
+       *
+       * <pre>
+       *是否需要缩略图
+       * </pre>
+       */
+      public boolean hasNeedThumbnail8() {
+        return ((bitField0_ & 0x00000080) == 0x00000080);
+      }
+      /**
+       * <code>optional bool NeedThumbnail8 = 8;</code>
+       *
+       * <pre>
+       *是否需要缩略图
+       * </pre>
+       */
+      public boolean getNeedThumbnail8() {
+        return needThumbnail8_;
+      }
+      /**
+       * <code>optional bool NeedThumbnail8 = 8;</code>
+       *
+       * <pre>
+       *是否需要缩略图
+       * </pre>
+       */
+      public Builder setNeedThumbnail8(boolean value) {
+        bitField0_ |= 0x00000080;
+        needThumbnail8_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional bool NeedThumbnail8 = 8;</code>
+       *
+       * <pre>
+       *是否需要缩略图
+       * </pre>
+       */
+      public Builder clearNeedThumbnail8() {
+        bitField0_ = (bitField0_ & ~0x00000080);
+        needThumbnail8_ = false;
+        onChanged();
+        return this;
+      }
+
       // optional string SourceIP42 = 42;
       private java.lang.Object sourceIP42_ = "";
       /**
@@ -8551,7 +8993,7 @@ public final class ProtoBufInfo {
        * </pre>
        */
       public boolean hasSourceIP42() {
-        return ((bitField0_ & 0x00000080) == 0x00000080);
+        return ((bitField0_ & 0x00000100) == 0x00000100);
       }
       /**
        * <code>optional string SourceIP42 = 42;</code>
@@ -8603,7 +9045,7 @@ public final class ProtoBufInfo {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000080;
+  bitField0_ |= 0x00000100;
         sourceIP42_ = value;
         onChanged();
         return this;
@@ -8616,7 +9058,7 @@ public final class ProtoBufInfo {
        * </pre>
        */
       public Builder clearSourceIP42() {
-        bitField0_ = (bitField0_ & ~0x00000080);
+        bitField0_ = (bitField0_ & ~0x00000100);
         sourceIP42_ = getDefaultInstance().getSourceIP42();
         onChanged();
         return this;
@@ -8633,7 +9075,7 @@ public final class ProtoBufInfo {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000080;
+  bitField0_ |= 0x00000100;
         sourceIP42_ = value;
         onChanged();
         return this;
@@ -8649,7 +9091,7 @@ public final class ProtoBufInfo {
        * </pre>
        */
       public boolean hasMachineID44() {
-        return ((bitField0_ & 0x00000100) == 0x00000100);
+        return ((bitField0_ & 0x00000200) == 0x00000200);
       }
       /**
        * <code>optional string MachineID44 = 44;</code>
@@ -8701,7 +9143,7 @@ public final class ProtoBufInfo {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000100;
+  bitField0_ |= 0x00000200;
         machineID44_ = value;
         onChanged();
         return this;
@@ -8714,7 +9156,7 @@ public final class ProtoBufInfo {
        * </pre>
        */
       public Builder clearMachineID44() {
-        bitField0_ = (bitField0_ & ~0x00000100);
+        bitField0_ = (bitField0_ & ~0x00000200);
         machineID44_ = getDefaultInstance().getMachineID44();
         onChanged();
         return this;
@@ -8731,7 +9173,7 @@ public final class ProtoBufInfo {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000100;
+  bitField0_ |= 0x00000200;
         machineID44_ = value;
         onChanged();
         return this;
@@ -10345,6 +10787,21 @@ public final class ProtoBufInfo {
      */
     com.google.protobuf.ByteString
         getExShenheRemark20Bytes();
+
+    // optional string ChangeHistory21 = 21;
+    /**
+     * <code>optional string ChangeHistory21 = 21;</code>
+     */
+    boolean hasChangeHistory21();
+    /**
+     * <code>optional string ChangeHistory21 = 21;</code>
+     */
+    java.lang.String getChangeHistory21();
+    /**
+     * <code>optional string ChangeHistory21 = 21;</code>
+     */
+    com.google.protobuf.ByteString
+        getChangeHistory21Bytes();
   }
   /**
    * Protobuf type {@code com.TigEra.document.definition.MsgBatchInfo}
@@ -10512,6 +10969,11 @@ public final class ProtoBufInfo {
             case 162: {
               bitField0_ |= 0x00040000;
               exShenheRemark20_ = input.readBytes();
+              break;
+            }
+            case 170: {
+              bitField0_ |= 0x00080000;
+              changeHistory21_ = input.readBytes();
               break;
             }
           }
@@ -11355,6 +11817,49 @@ public final class ProtoBufInfo {
       }
     }
 
+    // optional string ChangeHistory21 = 21;
+    public static final int CHANGEHISTORY21_FIELD_NUMBER = 21;
+    private java.lang.Object changeHistory21_;
+    /**
+     * <code>optional string ChangeHistory21 = 21;</code>
+     */
+    public boolean hasChangeHistory21() {
+      return ((bitField0_ & 0x00080000) == 0x00080000);
+    }
+    /**
+     * <code>optional string ChangeHistory21 = 21;</code>
+     */
+    public java.lang.String getChangeHistory21() {
+      java.lang.Object ref = changeHistory21_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          changeHistory21_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string ChangeHistory21 = 21;</code>
+     */
+    public com.google.protobuf.ByteString
+        getChangeHistory21Bytes() {
+      java.lang.Object ref = changeHistory21_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        changeHistory21_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private void initFields() {
       author1_ = "";
       version2_ = 0;
@@ -11376,6 +11881,7 @@ public final class ProtoBufInfo {
       editable18_ = false;
       exShenheResult19_ = 0;
       exShenheRemark20_ = "";
+      changeHistory21_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -11489,6 +11995,9 @@ public final class ProtoBufInfo {
       if (((bitField0_ & 0x00040000) == 0x00040000)) {
         output.writeBytes(20, getExShenheRemark20Bytes());
       }
+      if (((bitField0_ & 0x00080000) == 0x00080000)) {
+        output.writeBytes(21, getChangeHistory21Bytes());
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -11577,6 +12086,10 @@ public final class ProtoBufInfo {
       if (((bitField0_ & 0x00040000) == 0x00040000)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(20, getExShenheRemark20Bytes());
+      }
+      if (((bitField0_ & 0x00080000) == 0x00080000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(21, getChangeHistory21Bytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -11744,6 +12257,8 @@ public final class ProtoBufInfo {
         bitField0_ = (bitField0_ & ~0x00040000);
         exShenheRemark20_ = "";
         bitField0_ = (bitField0_ & ~0x00080000);
+        changeHistory21_ = "";
+        bitField0_ = (bitField0_ & ~0x00100000);
         return this;
       }
 
@@ -11861,6 +12376,10 @@ public final class ProtoBufInfo {
           to_bitField0_ |= 0x00040000;
         }
         result.exShenheRemark20_ = exShenheRemark20_;
+        if (((from_bitField0_ & 0x00100000) == 0x00100000)) {
+          to_bitField0_ |= 0x00080000;
+        }
+        result.changeHistory21_ = changeHistory21_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -11982,6 +12501,11 @@ public final class ProtoBufInfo {
         if (other.hasExShenheRemark20()) {
           bitField0_ |= 0x00080000;
           exShenheRemark20_ = other.exShenheRemark20_;
+          onChanged();
+        }
+        if (other.hasChangeHistory21()) {
+          bitField0_ |= 0x00100000;
+          changeHistory21_ = other.changeHistory21_;
           onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
@@ -13765,6 +14289,80 @@ public final class ProtoBufInfo {
         return this;
       }
 
+      // optional string ChangeHistory21 = 21;
+      private java.lang.Object changeHistory21_ = "";
+      /**
+       * <code>optional string ChangeHistory21 = 21;</code>
+       */
+      public boolean hasChangeHistory21() {
+        return ((bitField0_ & 0x00100000) == 0x00100000);
+      }
+      /**
+       * <code>optional string ChangeHistory21 = 21;</code>
+       */
+      public java.lang.String getChangeHistory21() {
+        java.lang.Object ref = changeHistory21_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          changeHistory21_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string ChangeHistory21 = 21;</code>
+       */
+      public com.google.protobuf.ByteString
+          getChangeHistory21Bytes() {
+        java.lang.Object ref = changeHistory21_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          changeHistory21_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string ChangeHistory21 = 21;</code>
+       */
+      public Builder setChangeHistory21(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00100000;
+        changeHistory21_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string ChangeHistory21 = 21;</code>
+       */
+      public Builder clearChangeHistory21() {
+        bitField0_ = (bitField0_ & ~0x00100000);
+        changeHistory21_ = getDefaultInstance().getChangeHistory21();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string ChangeHistory21 = 21;</code>
+       */
+      public Builder setChangeHistory21Bytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00100000;
+        changeHistory21_ = value;
+        onChanged();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:com.TigEra.document.definition.MsgBatchInfo)
     }
 
@@ -15393,29 +15991,58 @@ public final class ProtoBufInfo {
   public interface MsgBatchHisRspOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
 
-    // repeated .com.TigEra.document.definition.MsgBatchInfo batchs1 = 1;
+    // required string BatchNO1 = 1;
     /**
-     * <code>repeated .com.TigEra.document.definition.MsgBatchInfo batchs1 = 1;</code>
+     * <code>required string BatchNO1 = 1;</code>
+     */
+    boolean hasBatchNO1();
+    /**
+     * <code>required string BatchNO1 = 1;</code>
+     */
+    java.lang.String getBatchNO1();
+    /**
+     * <code>required string BatchNO1 = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getBatchNO1Bytes();
+
+    // required .com.TigEra.document.definition.MsgResultInfo Result2 = 2;
+    /**
+     * <code>required .com.TigEra.document.definition.MsgResultInfo Result2 = 2;</code>
+     */
+    boolean hasResult2();
+    /**
+     * <code>required .com.TigEra.document.definition.MsgResultInfo Result2 = 2;</code>
+     */
+    cn.net.sinodata.cm.pb.ProtoBufInfo.MsgResultInfo getResult2();
+    /**
+     * <code>required .com.TigEra.document.definition.MsgResultInfo Result2 = 2;</code>
+     */
+    cn.net.sinodata.cm.pb.ProtoBufInfo.MsgResultInfoOrBuilder getResult2OrBuilder();
+
+    // repeated .com.TigEra.document.definition.MsgBatchInfo batchs3 = 3;
+    /**
+     * <code>repeated .com.TigEra.document.definition.MsgBatchInfo batchs3 = 3;</code>
      */
     java.util.List<cn.net.sinodata.cm.pb.ProtoBufInfo.MsgBatchInfo> 
-        getBatchs1List();
+        getBatchs3List();
     /**
-     * <code>repeated .com.TigEra.document.definition.MsgBatchInfo batchs1 = 1;</code>
+     * <code>repeated .com.TigEra.document.definition.MsgBatchInfo batchs3 = 3;</code>
      */
-    cn.net.sinodata.cm.pb.ProtoBufInfo.MsgBatchInfo getBatchs1(int index);
+    cn.net.sinodata.cm.pb.ProtoBufInfo.MsgBatchInfo getBatchs3(int index);
     /**
-     * <code>repeated .com.TigEra.document.definition.MsgBatchInfo batchs1 = 1;</code>
+     * <code>repeated .com.TigEra.document.definition.MsgBatchInfo batchs3 = 3;</code>
      */
-    int getBatchs1Count();
+    int getBatchs3Count();
     /**
-     * <code>repeated .com.TigEra.document.definition.MsgBatchInfo batchs1 = 1;</code>
+     * <code>repeated .com.TigEra.document.definition.MsgBatchInfo batchs3 = 3;</code>
      */
     java.util.List<? extends cn.net.sinodata.cm.pb.ProtoBufInfo.MsgBatchInfoOrBuilder> 
-        getBatchs1OrBuilderList();
+        getBatchs3OrBuilderList();
     /**
-     * <code>repeated .com.TigEra.document.definition.MsgBatchInfo batchs1 = 1;</code>
+     * <code>repeated .com.TigEra.document.definition.MsgBatchInfo batchs3 = 3;</code>
      */
-    cn.net.sinodata.cm.pb.ProtoBufInfo.MsgBatchInfoOrBuilder getBatchs1OrBuilder(
+    cn.net.sinodata.cm.pb.ProtoBufInfo.MsgBatchInfoOrBuilder getBatchs3OrBuilder(
         int index);
   }
   /**
@@ -15470,11 +16097,29 @@ public final class ProtoBufInfo {
               break;
             }
             case 10: {
-              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
-                batchs1_ = new java.util.ArrayList<cn.net.sinodata.cm.pb.ProtoBufInfo.MsgBatchInfo>();
-                mutable_bitField0_ |= 0x00000001;
+              bitField0_ |= 0x00000001;
+              batchNO1_ = input.readBytes();
+              break;
+            }
+            case 18: {
+              cn.net.sinodata.cm.pb.ProtoBufInfo.MsgResultInfo.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000002) == 0x00000002)) {
+                subBuilder = result2_.toBuilder();
               }
-              batchs1_.add(input.readMessage(cn.net.sinodata.cm.pb.ProtoBufInfo.MsgBatchInfo.PARSER, extensionRegistry));
+              result2_ = input.readMessage(cn.net.sinodata.cm.pb.ProtoBufInfo.MsgResultInfo.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(result2_);
+                result2_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000002;
+              break;
+            }
+            case 26: {
+              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+                batchs3_ = new java.util.ArrayList<cn.net.sinodata.cm.pb.ProtoBufInfo.MsgBatchInfo>();
+                mutable_bitField0_ |= 0x00000004;
+              }
+              batchs3_.add(input.readMessage(cn.net.sinodata.cm.pb.ProtoBufInfo.MsgBatchInfo.PARSER, extensionRegistry));
               break;
             }
           }
@@ -15485,8 +16130,8 @@ public final class ProtoBufInfo {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
-          batchs1_ = java.util.Collections.unmodifiableList(batchs1_);
+        if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+          batchs3_ = java.util.Collections.unmodifiableList(batchs3_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -15519,52 +16164,132 @@ public final class ProtoBufInfo {
       return PARSER;
     }
 
-    // repeated .com.TigEra.document.definition.MsgBatchInfo batchs1 = 1;
-    public static final int BATCHS1_FIELD_NUMBER = 1;
-    private java.util.List<cn.net.sinodata.cm.pb.ProtoBufInfo.MsgBatchInfo> batchs1_;
+    private int bitField0_;
+    // required string BatchNO1 = 1;
+    public static final int BATCHNO1_FIELD_NUMBER = 1;
+    private java.lang.Object batchNO1_;
     /**
-     * <code>repeated .com.TigEra.document.definition.MsgBatchInfo batchs1 = 1;</code>
+     * <code>required string BatchNO1 = 1;</code>
      */
-    public java.util.List<cn.net.sinodata.cm.pb.ProtoBufInfo.MsgBatchInfo> getBatchs1List() {
-      return batchs1_;
+    public boolean hasBatchNO1() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>repeated .com.TigEra.document.definition.MsgBatchInfo batchs1 = 1;</code>
+     * <code>required string BatchNO1 = 1;</code>
+     */
+    public java.lang.String getBatchNO1() {
+      java.lang.Object ref = batchNO1_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          batchNO1_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string BatchNO1 = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getBatchNO1Bytes() {
+      java.lang.Object ref = batchNO1_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        batchNO1_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // required .com.TigEra.document.definition.MsgResultInfo Result2 = 2;
+    public static final int RESULT2_FIELD_NUMBER = 2;
+    private cn.net.sinodata.cm.pb.ProtoBufInfo.MsgResultInfo result2_;
+    /**
+     * <code>required .com.TigEra.document.definition.MsgResultInfo Result2 = 2;</code>
+     */
+    public boolean hasResult2() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required .com.TigEra.document.definition.MsgResultInfo Result2 = 2;</code>
+     */
+    public cn.net.sinodata.cm.pb.ProtoBufInfo.MsgResultInfo getResult2() {
+      return result2_;
+    }
+    /**
+     * <code>required .com.TigEra.document.definition.MsgResultInfo Result2 = 2;</code>
+     */
+    public cn.net.sinodata.cm.pb.ProtoBufInfo.MsgResultInfoOrBuilder getResult2OrBuilder() {
+      return result2_;
+    }
+
+    // repeated .com.TigEra.document.definition.MsgBatchInfo batchs3 = 3;
+    public static final int BATCHS3_FIELD_NUMBER = 3;
+    private java.util.List<cn.net.sinodata.cm.pb.ProtoBufInfo.MsgBatchInfo> batchs3_;
+    /**
+     * <code>repeated .com.TigEra.document.definition.MsgBatchInfo batchs3 = 3;</code>
+     */
+    public java.util.List<cn.net.sinodata.cm.pb.ProtoBufInfo.MsgBatchInfo> getBatchs3List() {
+      return batchs3_;
+    }
+    /**
+     * <code>repeated .com.TigEra.document.definition.MsgBatchInfo batchs3 = 3;</code>
      */
     public java.util.List<? extends cn.net.sinodata.cm.pb.ProtoBufInfo.MsgBatchInfoOrBuilder> 
-        getBatchs1OrBuilderList() {
-      return batchs1_;
+        getBatchs3OrBuilderList() {
+      return batchs3_;
     }
     /**
-     * <code>repeated .com.TigEra.document.definition.MsgBatchInfo batchs1 = 1;</code>
+     * <code>repeated .com.TigEra.document.definition.MsgBatchInfo batchs3 = 3;</code>
      */
-    public int getBatchs1Count() {
-      return batchs1_.size();
+    public int getBatchs3Count() {
+      return batchs3_.size();
     }
     /**
-     * <code>repeated .com.TigEra.document.definition.MsgBatchInfo batchs1 = 1;</code>
+     * <code>repeated .com.TigEra.document.definition.MsgBatchInfo batchs3 = 3;</code>
      */
-    public cn.net.sinodata.cm.pb.ProtoBufInfo.MsgBatchInfo getBatchs1(int index) {
-      return batchs1_.get(index);
+    public cn.net.sinodata.cm.pb.ProtoBufInfo.MsgBatchInfo getBatchs3(int index) {
+      return batchs3_.get(index);
     }
     /**
-     * <code>repeated .com.TigEra.document.definition.MsgBatchInfo batchs1 = 1;</code>
+     * <code>repeated .com.TigEra.document.definition.MsgBatchInfo batchs3 = 3;</code>
      */
-    public cn.net.sinodata.cm.pb.ProtoBufInfo.MsgBatchInfoOrBuilder getBatchs1OrBuilder(
+    public cn.net.sinodata.cm.pb.ProtoBufInfo.MsgBatchInfoOrBuilder getBatchs3OrBuilder(
         int index) {
-      return batchs1_.get(index);
+      return batchs3_.get(index);
     }
 
     private void initFields() {
-      batchs1_ = java.util.Collections.emptyList();
+      batchNO1_ = "";
+      result2_ = cn.net.sinodata.cm.pb.ProtoBufInfo.MsgResultInfo.getDefaultInstance();
+      batchs3_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized != -1) return isInitialized == 1;
 
-      for (int i = 0; i < getBatchs1Count(); i++) {
-        if (!getBatchs1(i).isInitialized()) {
+      if (!hasBatchNO1()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasResult2()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!getResult2().isInitialized()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      for (int i = 0; i < getBatchs3Count(); i++) {
+        if (!getBatchs3(i).isInitialized()) {
           memoizedIsInitialized = 0;
           return false;
         }
@@ -15576,8 +16301,14 @@ public final class ProtoBufInfo {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
-      for (int i = 0; i < batchs1_.size(); i++) {
-        output.writeMessage(1, batchs1_.get(i));
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBytes(1, getBatchNO1Bytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeMessage(2, result2_);
+      }
+      for (int i = 0; i < batchs3_.size(); i++) {
+        output.writeMessage(3, batchs3_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -15588,9 +16319,17 @@ public final class ProtoBufInfo {
       if (size != -1) return size;
 
       size = 0;
-      for (int i = 0; i < batchs1_.size(); i++) {
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, batchs1_.get(i));
+          .computeBytesSize(1, getBatchNO1Bytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, result2_);
+      }
+      for (int i = 0; i < batchs3_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(3, batchs3_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -15700,7 +16439,8 @@ public final class ProtoBufInfo {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-          getBatchs1FieldBuilder();
+          getResult2FieldBuilder();
+          getBatchs3FieldBuilder();
         }
       }
       private static Builder create() {
@@ -15709,11 +16449,19 @@ public final class ProtoBufInfo {
 
       public Builder clear() {
         super.clear();
-        if (batchs1Builder_ == null) {
-          batchs1_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000001);
+        batchNO1_ = "";
+        bitField0_ = (bitField0_ & ~0x00000001);
+        if (result2Builder_ == null) {
+          result2_ = cn.net.sinodata.cm.pb.ProtoBufInfo.MsgResultInfo.getDefaultInstance();
         } else {
-          batchs1Builder_.clear();
+          result2Builder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
+        if (batchs3Builder_ == null) {
+          batchs3_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000004);
+        } else {
+          batchs3Builder_.clear();
         }
         return this;
       }
@@ -15742,15 +16490,29 @@ public final class ProtoBufInfo {
       public cn.net.sinodata.cm.pb.ProtoBufInfo.MsgBatchHisRsp buildPartial() {
         cn.net.sinodata.cm.pb.ProtoBufInfo.MsgBatchHisRsp result = new cn.net.sinodata.cm.pb.ProtoBufInfo.MsgBatchHisRsp(this);
         int from_bitField0_ = bitField0_;
-        if (batchs1Builder_ == null) {
-          if (((bitField0_ & 0x00000001) == 0x00000001)) {
-            batchs1_ = java.util.Collections.unmodifiableList(batchs1_);
-            bitField0_ = (bitField0_ & ~0x00000001);
-          }
-          result.batchs1_ = batchs1_;
-        } else {
-          result.batchs1_ = batchs1Builder_.build();
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
         }
+        result.batchNO1_ = batchNO1_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        if (result2Builder_ == null) {
+          result.result2_ = result2_;
+        } else {
+          result.result2_ = result2Builder_.build();
+        }
+        if (batchs3Builder_ == null) {
+          if (((bitField0_ & 0x00000004) == 0x00000004)) {
+            batchs3_ = java.util.Collections.unmodifiableList(batchs3_);
+            bitField0_ = (bitField0_ & ~0x00000004);
+          }
+          result.batchs3_ = batchs3_;
+        } else {
+          result.batchs3_ = batchs3Builder_.build();
+        }
+        result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
@@ -15766,29 +16528,37 @@ public final class ProtoBufInfo {
 
       public Builder mergeFrom(cn.net.sinodata.cm.pb.ProtoBufInfo.MsgBatchHisRsp other) {
         if (other == cn.net.sinodata.cm.pb.ProtoBufInfo.MsgBatchHisRsp.getDefaultInstance()) return this;
-        if (batchs1Builder_ == null) {
-          if (!other.batchs1_.isEmpty()) {
-            if (batchs1_.isEmpty()) {
-              batchs1_ = other.batchs1_;
-              bitField0_ = (bitField0_ & ~0x00000001);
+        if (other.hasBatchNO1()) {
+          bitField0_ |= 0x00000001;
+          batchNO1_ = other.batchNO1_;
+          onChanged();
+        }
+        if (other.hasResult2()) {
+          mergeResult2(other.getResult2());
+        }
+        if (batchs3Builder_ == null) {
+          if (!other.batchs3_.isEmpty()) {
+            if (batchs3_.isEmpty()) {
+              batchs3_ = other.batchs3_;
+              bitField0_ = (bitField0_ & ~0x00000004);
             } else {
-              ensureBatchs1IsMutable();
-              batchs1_.addAll(other.batchs1_);
+              ensureBatchs3IsMutable();
+              batchs3_.addAll(other.batchs3_);
             }
             onChanged();
           }
         } else {
-          if (!other.batchs1_.isEmpty()) {
-            if (batchs1Builder_.isEmpty()) {
-              batchs1Builder_.dispose();
-              batchs1Builder_ = null;
-              batchs1_ = other.batchs1_;
-              bitField0_ = (bitField0_ & ~0x00000001);
-              batchs1Builder_ = 
+          if (!other.batchs3_.isEmpty()) {
+            if (batchs3Builder_.isEmpty()) {
+              batchs3Builder_.dispose();
+              batchs3Builder_ = null;
+              batchs3_ = other.batchs3_;
+              bitField0_ = (bitField0_ & ~0x00000004);
+              batchs3Builder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                   getBatchs1FieldBuilder() : null;
+                   getBatchs3FieldBuilder() : null;
             } else {
-              batchs1Builder_.addAllMessages(other.batchs1_);
+              batchs3Builder_.addAllMessages(other.batchs3_);
             }
           }
         }
@@ -15797,8 +16567,20 @@ public final class ProtoBufInfo {
       }
 
       public final boolean isInitialized() {
-        for (int i = 0; i < getBatchs1Count(); i++) {
-          if (!getBatchs1(i).isInitialized()) {
+        if (!hasBatchNO1()) {
+          
+          return false;
+        }
+        if (!hasResult2()) {
+          
+          return false;
+        }
+        if (!getResult2().isInitialized()) {
+          
+          return false;
+        }
+        for (int i = 0; i < getBatchs3Count(); i++) {
+          if (!getBatchs3(i).isInitialized()) {
             
             return false;
           }
@@ -15825,244 +16607,435 @@ public final class ProtoBufInfo {
       }
       private int bitField0_;
 
-      // repeated .com.TigEra.document.definition.MsgBatchInfo batchs1 = 1;
-      private java.util.List<cn.net.sinodata.cm.pb.ProtoBufInfo.MsgBatchInfo> batchs1_ =
+      // required string BatchNO1 = 1;
+      private java.lang.Object batchNO1_ = "";
+      /**
+       * <code>required string BatchNO1 = 1;</code>
+       */
+      public boolean hasBatchNO1() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required string BatchNO1 = 1;</code>
+       */
+      public java.lang.String getBatchNO1() {
+        java.lang.Object ref = batchNO1_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          batchNO1_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>required string BatchNO1 = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getBatchNO1Bytes() {
+        java.lang.Object ref = batchNO1_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          batchNO1_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string BatchNO1 = 1;</code>
+       */
+      public Builder setBatchNO1(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        batchNO1_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string BatchNO1 = 1;</code>
+       */
+      public Builder clearBatchNO1() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        batchNO1_ = getDefaultInstance().getBatchNO1();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string BatchNO1 = 1;</code>
+       */
+      public Builder setBatchNO1Bytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        batchNO1_ = value;
+        onChanged();
+        return this;
+      }
+
+      // required .com.TigEra.document.definition.MsgResultInfo Result2 = 2;
+      private cn.net.sinodata.cm.pb.ProtoBufInfo.MsgResultInfo result2_ = cn.net.sinodata.cm.pb.ProtoBufInfo.MsgResultInfo.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          cn.net.sinodata.cm.pb.ProtoBufInfo.MsgResultInfo, cn.net.sinodata.cm.pb.ProtoBufInfo.MsgResultInfo.Builder, cn.net.sinodata.cm.pb.ProtoBufInfo.MsgResultInfoOrBuilder> result2Builder_;
+      /**
+       * <code>required .com.TigEra.document.definition.MsgResultInfo Result2 = 2;</code>
+       */
+      public boolean hasResult2() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required .com.TigEra.document.definition.MsgResultInfo Result2 = 2;</code>
+       */
+      public cn.net.sinodata.cm.pb.ProtoBufInfo.MsgResultInfo getResult2() {
+        if (result2Builder_ == null) {
+          return result2_;
+        } else {
+          return result2Builder_.getMessage();
+        }
+      }
+      /**
+       * <code>required .com.TigEra.document.definition.MsgResultInfo Result2 = 2;</code>
+       */
+      public Builder setResult2(cn.net.sinodata.cm.pb.ProtoBufInfo.MsgResultInfo value) {
+        if (result2Builder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          result2_ = value;
+          onChanged();
+        } else {
+          result2Builder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>required .com.TigEra.document.definition.MsgResultInfo Result2 = 2;</code>
+       */
+      public Builder setResult2(
+          cn.net.sinodata.cm.pb.ProtoBufInfo.MsgResultInfo.Builder builderForValue) {
+        if (result2Builder_ == null) {
+          result2_ = builderForValue.build();
+          onChanged();
+        } else {
+          result2Builder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>required .com.TigEra.document.definition.MsgResultInfo Result2 = 2;</code>
+       */
+      public Builder mergeResult2(cn.net.sinodata.cm.pb.ProtoBufInfo.MsgResultInfo value) {
+        if (result2Builder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002) &&
+              result2_ != cn.net.sinodata.cm.pb.ProtoBufInfo.MsgResultInfo.getDefaultInstance()) {
+            result2_ =
+              cn.net.sinodata.cm.pb.ProtoBufInfo.MsgResultInfo.newBuilder(result2_).mergeFrom(value).buildPartial();
+          } else {
+            result2_ = value;
+          }
+          onChanged();
+        } else {
+          result2Builder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>required .com.TigEra.document.definition.MsgResultInfo Result2 = 2;</code>
+       */
+      public Builder clearResult2() {
+        if (result2Builder_ == null) {
+          result2_ = cn.net.sinodata.cm.pb.ProtoBufInfo.MsgResultInfo.getDefaultInstance();
+          onChanged();
+        } else {
+          result2Builder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+      /**
+       * <code>required .com.TigEra.document.definition.MsgResultInfo Result2 = 2;</code>
+       */
+      public cn.net.sinodata.cm.pb.ProtoBufInfo.MsgResultInfo.Builder getResult2Builder() {
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return getResult2FieldBuilder().getBuilder();
+      }
+      /**
+       * <code>required .com.TigEra.document.definition.MsgResultInfo Result2 = 2;</code>
+       */
+      public cn.net.sinodata.cm.pb.ProtoBufInfo.MsgResultInfoOrBuilder getResult2OrBuilder() {
+        if (result2Builder_ != null) {
+          return result2Builder_.getMessageOrBuilder();
+        } else {
+          return result2_;
+        }
+      }
+      /**
+       * <code>required .com.TigEra.document.definition.MsgResultInfo Result2 = 2;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          cn.net.sinodata.cm.pb.ProtoBufInfo.MsgResultInfo, cn.net.sinodata.cm.pb.ProtoBufInfo.MsgResultInfo.Builder, cn.net.sinodata.cm.pb.ProtoBufInfo.MsgResultInfoOrBuilder> 
+          getResult2FieldBuilder() {
+        if (result2Builder_ == null) {
+          result2Builder_ = new com.google.protobuf.SingleFieldBuilder<
+              cn.net.sinodata.cm.pb.ProtoBufInfo.MsgResultInfo, cn.net.sinodata.cm.pb.ProtoBufInfo.MsgResultInfo.Builder, cn.net.sinodata.cm.pb.ProtoBufInfo.MsgResultInfoOrBuilder>(
+                  result2_,
+                  getParentForChildren(),
+                  isClean());
+          result2_ = null;
+        }
+        return result2Builder_;
+      }
+
+      // repeated .com.TigEra.document.definition.MsgBatchInfo batchs3 = 3;
+      private java.util.List<cn.net.sinodata.cm.pb.ProtoBufInfo.MsgBatchInfo> batchs3_ =
         java.util.Collections.emptyList();
-      private void ensureBatchs1IsMutable() {
-        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
-          batchs1_ = new java.util.ArrayList<cn.net.sinodata.cm.pb.ProtoBufInfo.MsgBatchInfo>(batchs1_);
-          bitField0_ |= 0x00000001;
+      private void ensureBatchs3IsMutable() {
+        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
+          batchs3_ = new java.util.ArrayList<cn.net.sinodata.cm.pb.ProtoBufInfo.MsgBatchInfo>(batchs3_);
+          bitField0_ |= 0x00000004;
          }
       }
 
       private com.google.protobuf.RepeatedFieldBuilder<
-          cn.net.sinodata.cm.pb.ProtoBufInfo.MsgBatchInfo, cn.net.sinodata.cm.pb.ProtoBufInfo.MsgBatchInfo.Builder, cn.net.sinodata.cm.pb.ProtoBufInfo.MsgBatchInfoOrBuilder> batchs1Builder_;
+          cn.net.sinodata.cm.pb.ProtoBufInfo.MsgBatchInfo, cn.net.sinodata.cm.pb.ProtoBufInfo.MsgBatchInfo.Builder, cn.net.sinodata.cm.pb.ProtoBufInfo.MsgBatchInfoOrBuilder> batchs3Builder_;
 
       /**
-       * <code>repeated .com.TigEra.document.definition.MsgBatchInfo batchs1 = 1;</code>
+       * <code>repeated .com.TigEra.document.definition.MsgBatchInfo batchs3 = 3;</code>
        */
-      public java.util.List<cn.net.sinodata.cm.pb.ProtoBufInfo.MsgBatchInfo> getBatchs1List() {
-        if (batchs1Builder_ == null) {
-          return java.util.Collections.unmodifiableList(batchs1_);
+      public java.util.List<cn.net.sinodata.cm.pb.ProtoBufInfo.MsgBatchInfo> getBatchs3List() {
+        if (batchs3Builder_ == null) {
+          return java.util.Collections.unmodifiableList(batchs3_);
         } else {
-          return batchs1Builder_.getMessageList();
+          return batchs3Builder_.getMessageList();
         }
       }
       /**
-       * <code>repeated .com.TigEra.document.definition.MsgBatchInfo batchs1 = 1;</code>
+       * <code>repeated .com.TigEra.document.definition.MsgBatchInfo batchs3 = 3;</code>
        */
-      public int getBatchs1Count() {
-        if (batchs1Builder_ == null) {
-          return batchs1_.size();
+      public int getBatchs3Count() {
+        if (batchs3Builder_ == null) {
+          return batchs3_.size();
         } else {
-          return batchs1Builder_.getCount();
+          return batchs3Builder_.getCount();
         }
       }
       /**
-       * <code>repeated .com.TigEra.document.definition.MsgBatchInfo batchs1 = 1;</code>
+       * <code>repeated .com.TigEra.document.definition.MsgBatchInfo batchs3 = 3;</code>
        */
-      public cn.net.sinodata.cm.pb.ProtoBufInfo.MsgBatchInfo getBatchs1(int index) {
-        if (batchs1Builder_ == null) {
-          return batchs1_.get(index);
+      public cn.net.sinodata.cm.pb.ProtoBufInfo.MsgBatchInfo getBatchs3(int index) {
+        if (batchs3Builder_ == null) {
+          return batchs3_.get(index);
         } else {
-          return batchs1Builder_.getMessage(index);
+          return batchs3Builder_.getMessage(index);
         }
       }
       /**
-       * <code>repeated .com.TigEra.document.definition.MsgBatchInfo batchs1 = 1;</code>
+       * <code>repeated .com.TigEra.document.definition.MsgBatchInfo batchs3 = 3;</code>
        */
-      public Builder setBatchs1(
+      public Builder setBatchs3(
           int index, cn.net.sinodata.cm.pb.ProtoBufInfo.MsgBatchInfo value) {
-        if (batchs1Builder_ == null) {
+        if (batchs3Builder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureBatchs1IsMutable();
-          batchs1_.set(index, value);
+          ensureBatchs3IsMutable();
+          batchs3_.set(index, value);
           onChanged();
         } else {
-          batchs1Builder_.setMessage(index, value);
+          batchs3Builder_.setMessage(index, value);
         }
         return this;
       }
       /**
-       * <code>repeated .com.TigEra.document.definition.MsgBatchInfo batchs1 = 1;</code>
+       * <code>repeated .com.TigEra.document.definition.MsgBatchInfo batchs3 = 3;</code>
        */
-      public Builder setBatchs1(
+      public Builder setBatchs3(
           int index, cn.net.sinodata.cm.pb.ProtoBufInfo.MsgBatchInfo.Builder builderForValue) {
-        if (batchs1Builder_ == null) {
-          ensureBatchs1IsMutable();
-          batchs1_.set(index, builderForValue.build());
+        if (batchs3Builder_ == null) {
+          ensureBatchs3IsMutable();
+          batchs3_.set(index, builderForValue.build());
           onChanged();
         } else {
-          batchs1Builder_.setMessage(index, builderForValue.build());
+          batchs3Builder_.setMessage(index, builderForValue.build());
         }
         return this;
       }
       /**
-       * <code>repeated .com.TigEra.document.definition.MsgBatchInfo batchs1 = 1;</code>
+       * <code>repeated .com.TigEra.document.definition.MsgBatchInfo batchs3 = 3;</code>
        */
-      public Builder addBatchs1(cn.net.sinodata.cm.pb.ProtoBufInfo.MsgBatchInfo value) {
-        if (batchs1Builder_ == null) {
+      public Builder addBatchs3(cn.net.sinodata.cm.pb.ProtoBufInfo.MsgBatchInfo value) {
+        if (batchs3Builder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureBatchs1IsMutable();
-          batchs1_.add(value);
+          ensureBatchs3IsMutable();
+          batchs3_.add(value);
           onChanged();
         } else {
-          batchs1Builder_.addMessage(value);
+          batchs3Builder_.addMessage(value);
         }
         return this;
       }
       /**
-       * <code>repeated .com.TigEra.document.definition.MsgBatchInfo batchs1 = 1;</code>
+       * <code>repeated .com.TigEra.document.definition.MsgBatchInfo batchs3 = 3;</code>
        */
-      public Builder addBatchs1(
+      public Builder addBatchs3(
           int index, cn.net.sinodata.cm.pb.ProtoBufInfo.MsgBatchInfo value) {
-        if (batchs1Builder_ == null) {
+        if (batchs3Builder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureBatchs1IsMutable();
-          batchs1_.add(index, value);
+          ensureBatchs3IsMutable();
+          batchs3_.add(index, value);
           onChanged();
         } else {
-          batchs1Builder_.addMessage(index, value);
+          batchs3Builder_.addMessage(index, value);
         }
         return this;
       }
       /**
-       * <code>repeated .com.TigEra.document.definition.MsgBatchInfo batchs1 = 1;</code>
+       * <code>repeated .com.TigEra.document.definition.MsgBatchInfo batchs3 = 3;</code>
        */
-      public Builder addBatchs1(
+      public Builder addBatchs3(
           cn.net.sinodata.cm.pb.ProtoBufInfo.MsgBatchInfo.Builder builderForValue) {
-        if (batchs1Builder_ == null) {
-          ensureBatchs1IsMutable();
-          batchs1_.add(builderForValue.build());
+        if (batchs3Builder_ == null) {
+          ensureBatchs3IsMutable();
+          batchs3_.add(builderForValue.build());
           onChanged();
         } else {
-          batchs1Builder_.addMessage(builderForValue.build());
+          batchs3Builder_.addMessage(builderForValue.build());
         }
         return this;
       }
       /**
-       * <code>repeated .com.TigEra.document.definition.MsgBatchInfo batchs1 = 1;</code>
+       * <code>repeated .com.TigEra.document.definition.MsgBatchInfo batchs3 = 3;</code>
        */
-      public Builder addBatchs1(
+      public Builder addBatchs3(
           int index, cn.net.sinodata.cm.pb.ProtoBufInfo.MsgBatchInfo.Builder builderForValue) {
-        if (batchs1Builder_ == null) {
-          ensureBatchs1IsMutable();
-          batchs1_.add(index, builderForValue.build());
+        if (batchs3Builder_ == null) {
+          ensureBatchs3IsMutable();
+          batchs3_.add(index, builderForValue.build());
           onChanged();
         } else {
-          batchs1Builder_.addMessage(index, builderForValue.build());
+          batchs3Builder_.addMessage(index, builderForValue.build());
         }
         return this;
       }
       /**
-       * <code>repeated .com.TigEra.document.definition.MsgBatchInfo batchs1 = 1;</code>
+       * <code>repeated .com.TigEra.document.definition.MsgBatchInfo batchs3 = 3;</code>
        */
-      public Builder addAllBatchs1(
+      public Builder addAllBatchs3(
           java.lang.Iterable<? extends cn.net.sinodata.cm.pb.ProtoBufInfo.MsgBatchInfo> values) {
-        if (batchs1Builder_ == null) {
-          ensureBatchs1IsMutable();
-          super.addAll(values, batchs1_);
+        if (batchs3Builder_ == null) {
+          ensureBatchs3IsMutable();
+          super.addAll(values, batchs3_);
           onChanged();
         } else {
-          batchs1Builder_.addAllMessages(values);
+          batchs3Builder_.addAllMessages(values);
         }
         return this;
       }
       /**
-       * <code>repeated .com.TigEra.document.definition.MsgBatchInfo batchs1 = 1;</code>
+       * <code>repeated .com.TigEra.document.definition.MsgBatchInfo batchs3 = 3;</code>
        */
-      public Builder clearBatchs1() {
-        if (batchs1Builder_ == null) {
-          batchs1_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000001);
+      public Builder clearBatchs3() {
+        if (batchs3Builder_ == null) {
+          batchs3_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000004);
           onChanged();
         } else {
-          batchs1Builder_.clear();
+          batchs3Builder_.clear();
         }
         return this;
       }
       /**
-       * <code>repeated .com.TigEra.document.definition.MsgBatchInfo batchs1 = 1;</code>
+       * <code>repeated .com.TigEra.document.definition.MsgBatchInfo batchs3 = 3;</code>
        */
-      public Builder removeBatchs1(int index) {
-        if (batchs1Builder_ == null) {
-          ensureBatchs1IsMutable();
-          batchs1_.remove(index);
+      public Builder removeBatchs3(int index) {
+        if (batchs3Builder_ == null) {
+          ensureBatchs3IsMutable();
+          batchs3_.remove(index);
           onChanged();
         } else {
-          batchs1Builder_.remove(index);
+          batchs3Builder_.remove(index);
         }
         return this;
       }
       /**
-       * <code>repeated .com.TigEra.document.definition.MsgBatchInfo batchs1 = 1;</code>
+       * <code>repeated .com.TigEra.document.definition.MsgBatchInfo batchs3 = 3;</code>
        */
-      public cn.net.sinodata.cm.pb.ProtoBufInfo.MsgBatchInfo.Builder getBatchs1Builder(
+      public cn.net.sinodata.cm.pb.ProtoBufInfo.MsgBatchInfo.Builder getBatchs3Builder(
           int index) {
-        return getBatchs1FieldBuilder().getBuilder(index);
+        return getBatchs3FieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .com.TigEra.document.definition.MsgBatchInfo batchs1 = 1;</code>
+       * <code>repeated .com.TigEra.document.definition.MsgBatchInfo batchs3 = 3;</code>
        */
-      public cn.net.sinodata.cm.pb.ProtoBufInfo.MsgBatchInfoOrBuilder getBatchs1OrBuilder(
+      public cn.net.sinodata.cm.pb.ProtoBufInfo.MsgBatchInfoOrBuilder getBatchs3OrBuilder(
           int index) {
-        if (batchs1Builder_ == null) {
-          return batchs1_.get(index);  } else {
-          return batchs1Builder_.getMessageOrBuilder(index);
+        if (batchs3Builder_ == null) {
+          return batchs3_.get(index);  } else {
+          return batchs3Builder_.getMessageOrBuilder(index);
         }
       }
       /**
-       * <code>repeated .com.TigEra.document.definition.MsgBatchInfo batchs1 = 1;</code>
+       * <code>repeated .com.TigEra.document.definition.MsgBatchInfo batchs3 = 3;</code>
        */
       public java.util.List<? extends cn.net.sinodata.cm.pb.ProtoBufInfo.MsgBatchInfoOrBuilder> 
-           getBatchs1OrBuilderList() {
-        if (batchs1Builder_ != null) {
-          return batchs1Builder_.getMessageOrBuilderList();
+           getBatchs3OrBuilderList() {
+        if (batchs3Builder_ != null) {
+          return batchs3Builder_.getMessageOrBuilderList();
         } else {
-          return java.util.Collections.unmodifiableList(batchs1_);
+          return java.util.Collections.unmodifiableList(batchs3_);
         }
       }
       /**
-       * <code>repeated .com.TigEra.document.definition.MsgBatchInfo batchs1 = 1;</code>
+       * <code>repeated .com.TigEra.document.definition.MsgBatchInfo batchs3 = 3;</code>
        */
-      public cn.net.sinodata.cm.pb.ProtoBufInfo.MsgBatchInfo.Builder addBatchs1Builder() {
-        return getBatchs1FieldBuilder().addBuilder(
+      public cn.net.sinodata.cm.pb.ProtoBufInfo.MsgBatchInfo.Builder addBatchs3Builder() {
+        return getBatchs3FieldBuilder().addBuilder(
             cn.net.sinodata.cm.pb.ProtoBufInfo.MsgBatchInfo.getDefaultInstance());
       }
       /**
-       * <code>repeated .com.TigEra.document.definition.MsgBatchInfo batchs1 = 1;</code>
+       * <code>repeated .com.TigEra.document.definition.MsgBatchInfo batchs3 = 3;</code>
        */
-      public cn.net.sinodata.cm.pb.ProtoBufInfo.MsgBatchInfo.Builder addBatchs1Builder(
+      public cn.net.sinodata.cm.pb.ProtoBufInfo.MsgBatchInfo.Builder addBatchs3Builder(
           int index) {
-        return getBatchs1FieldBuilder().addBuilder(
+        return getBatchs3FieldBuilder().addBuilder(
             index, cn.net.sinodata.cm.pb.ProtoBufInfo.MsgBatchInfo.getDefaultInstance());
       }
       /**
-       * <code>repeated .com.TigEra.document.definition.MsgBatchInfo batchs1 = 1;</code>
+       * <code>repeated .com.TigEra.document.definition.MsgBatchInfo batchs3 = 3;</code>
        */
       public java.util.List<cn.net.sinodata.cm.pb.ProtoBufInfo.MsgBatchInfo.Builder> 
-           getBatchs1BuilderList() {
-        return getBatchs1FieldBuilder().getBuilderList();
+           getBatchs3BuilderList() {
+        return getBatchs3FieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilder<
           cn.net.sinodata.cm.pb.ProtoBufInfo.MsgBatchInfo, cn.net.sinodata.cm.pb.ProtoBufInfo.MsgBatchInfo.Builder, cn.net.sinodata.cm.pb.ProtoBufInfo.MsgBatchInfoOrBuilder> 
-          getBatchs1FieldBuilder() {
-        if (batchs1Builder_ == null) {
-          batchs1Builder_ = new com.google.protobuf.RepeatedFieldBuilder<
+          getBatchs3FieldBuilder() {
+        if (batchs3Builder_ == null) {
+          batchs3Builder_ = new com.google.protobuf.RepeatedFieldBuilder<
               cn.net.sinodata.cm.pb.ProtoBufInfo.MsgBatchInfo, cn.net.sinodata.cm.pb.ProtoBufInfo.MsgBatchInfo.Builder, cn.net.sinodata.cm.pb.ProtoBufInfo.MsgBatchInfoOrBuilder>(
-                  batchs1_,
-                  ((bitField0_ & 0x00000001) == 0x00000001),
+                  batchs3_,
+                  ((bitField0_ & 0x00000004) == 0x00000004),
                   getParentForChildren(),
                   isClean());
-          batchs1_ = null;
+          batchs3_ = null;
         }
-        return batchs1Builder_;
+        return batchs3Builder_;
       }
 
       // @@protoc_insertion_point(builder_scope:com.TigEra.document.definition.MsgBatchHisRsp)
@@ -17704,7 +18677,7 @@ public final class ProtoBufInfo {
       "ment.definition.EOperType\022\021\n\tRegionX11\030\013" +
       " \002(\005\022\021\n\tRegionY12\030\014 \002(\005\022\025\n\rRegionWidth13" +
       "\030\r \002(\005\022\026\n\016RegionHeight14\030\016 \002(\005\022\022\n\nEditab" +
-      "le15\030\017 \001(\010\"\361\003\n\013MsgFileInfo\022\017\n\007Author1\030\001 " +
+      "le15\030\017 \001(\010\"\242\004\n\013MsgFileInfo\022\017\n\007Author1\030\001 " +
       "\002(\t\022\020\n\010Version2\030\002 \002(\005\022\023\n\013CreateDate3\030\003 \002" +
       "(\005\022\023\n\013CreateTime4\030\004 \002(\005\022\017\n\007Remark5\030\005 \001(\t" +
       "\022\021\n\tFileName6\030\006 \002(\t\022\020\n\010FileURL7\030\007 \001(\t\022\017\n" +
@@ -17716,44 +18689,49 @@ public final class ProtoBufInfo {
       "a.document.definition.MsgNoteInfo\022\026\n\016exF" +
       "aPiaoCode16\030\020 \001(\t\022\022\n\nEditable18\030\022 \001(\010\022\030\n" +
       "\020exShenheResult19\030\023 \001(\005\022\030\n\020exShenheRemar" +
-      "k20\030\024 \001(\t\022\023\n\013LocalPath21\030\025 \001(\t\"\272\001\n\021MsgQu" +
-      "eryBatchInfo\022\r\n\005User1\030\001 \002(\t\022\021\n\tPassword2" +
-      "\030\002 \002(\t\022\016\n\006OrgID3\030\003 \002(\t\022\022\n\nQueryDate4\030\004 \002" +
-      "(\005\022\022\n\nQueryTime5\030\005 \002(\005\022\020\n\010BatchNO6\030\006 \002(\t",
-      "\022\020\n\010Version7\030\007 \002(\005\022\022\n\nSourceIP42\030* \001(\t\022\023" +
-      "\n\013MachineID44\030, \001(\t\"8\n\024MsgOptionQueryBat" +
-      "chs\022\r\n\005User1\030\001 \002(\t\022\021\n\tPassword2\030\002 \002(\t\",\n" +
-      "\027MsgRspOptionQueryBatchs\022\021\n\tBatchNOs2\030\002 " +
-      "\003(\t\"\247\004\n\014MsgBatchInfo\022\017\n\007Author1\030\001 \002(\t\022\020\n" +
-      "\010Version2\030\002 \002(\005\022\023\n\013CreateDate3\030\003 \002(\005\022\023\n\013" +
-      "CreateTime4\030\004 \002(\005\022\017\n\007Remark5\030\005 \001(\t\022\020\n\010Ba" +
-      "tchNO6\030\006 \002(\t\022\016\n\006Title7\030\007 \001(\t\022=\n\nOperatio" +
-      "n8\030\010 \002(\0162).com.TigEra.document.definitio" +
-      "n.EOperType\022?\n\nFileinfos9\030\t \003(\0132+.com.Ti",
-      "gEra.document.definition.MsgFileInfo\022\017\n\007" +
-      "OrgID10\030\n \001(\t\022\023\n\013BusiSysId11\030\013 \001(\t\022\024\n\014Bu" +
-      "siTypeId12\030\014 \001(\t\022\021\n\tBarCode13\030\r \001(\t\022\022\n\nS" +
-      "ourceIP14\030\016 \001(\t\022\023\n\013MachineID15\030\017 \001(\t\022\022\n\n" +
-      "Password16\030\020 \002(\t\022C\n\014ResultInfo17\030\021 \001(\0132-" +
-      ".com.TigEra.document.definition.MsgResul" +
-      "tInfo\022\022\n\nEditable18\030\022 \001(\010\022\030\n\020exShenheRes" +
-      "ult19\030\023 \001(\005\022\030\n\020exShenheRemark20\030\024 \001(\t\"B\n" +
-      "\016MsgAccountInfo\022\r\n\005User1\030\001 \002(\t\022\021\n\tPasswo" +
-      "rd2\030\002 \002(\t\022\016\n\006OrgID3\030\003 \002(\t\"D\n\016MsgBatchHis",
-      "Qry\022\r\n\005User1\030\001 \002(\t\022\021\n\tPassword2\030\002 \002(\t\022\020\n" +
-      "\010BatchNO3\030\003 \002(\t\"O\n\016MsgBatchHisRsp\022=\n\007bat" +
-      "chs1\030\001 \003(\0132,.com.TigEra.document.definit" +
-      "ion.MsgBatchInfo\"\023\n\021MsgServersListQry\"(\n" +
-      "\021MsgServersListRsp\022\023\n\013serverlist1\030\001 \003(\t\"" +
-      "\022\n\020MsgServerInfoQry\"#\n\020MsgServerInfoRsp\022" +
-      "\017\n\007Burden1\030\001 \002(\005*v\n\tEOperType\022\032\n\026eFROM_S" +
-      "ERVER_NOTCHANGE\020\000\022\010\n\004eADD\020\001\022\010\n\004eDEL\020\002\022\010\n" +
-      "\004eUPD\020\004\022\014\n\010eUPDNOTE\020\010\022\020\n\014eUPDATEBASIC\020\020\022" +
-      "\017\n\013eUPDATEFILE\020 *:\n\nEPrivilege\022\t\n\005eNone\020",
-      "\000\022\t\n\005eView\020\001\022\013\n\007eUpdate\020\002\022\t\n\005eFull\020\004*;\n\r" +
-      "EResultStatus\022\014\n\010eSuccess\020\000\022\013\n\007eFailed\020\001" +
-      "\022\017\n\013eOnProgress\020\002B%\n\025cn.net.sinodata.cm." +
-      "pbB\014ProtoBufInfo"
+      "k20\030\024 \001(\t\022\023\n\013LocalPath21\030\025 \001(\t\022\027\n\017Change" +
+      "History22\030\026 \001(\t\022\026\n\016ThumbnailURL23\030\027 \001(\t\"" +
+      "\322\001\n\021MsgQueryBatchInfo\022\r\n\005User1\030\001 \002(\t\022\021\n\t" +
+      "Password2\030\002 \002(\t\022\016\n\006OrgID3\030\003 \002(\t\022\022\n\nQuery",
+      "Date4\030\004 \002(\005\022\022\n\nQueryTime5\030\005 \002(\005\022\020\n\010Batch" +
+      "NO6\030\006 \002(\t\022\020\n\010Version7\030\007 \002(\005\022\026\n\016NeedThumb" +
+      "nail8\030\010 \001(\010\022\022\n\nSourceIP42\030* \001(\t\022\023\n\013Machi" +
+      "neID44\030, \001(\t\"8\n\024MsgOptionQueryBatchs\022\r\n\005" +
+      "User1\030\001 \002(\t\022\021\n\tPassword2\030\002 \002(\t\",\n\027MsgRsp" +
+      "OptionQueryBatchs\022\021\n\tBatchNOs2\030\002 \003(\t\"\300\004\n" +
+      "\014MsgBatchInfo\022\017\n\007Author1\030\001 \002(\t\022\020\n\010Versio" +
+      "n2\030\002 \002(\005\022\023\n\013CreateDate3\030\003 \002(\005\022\023\n\013CreateT" +
+      "ime4\030\004 \002(\005\022\017\n\007Remark5\030\005 \001(\t\022\020\n\010BatchNO6\030" +
+      "\006 \002(\t\022\016\n\006Title7\030\007 \001(\t\022=\n\nOperation8\030\010 \002(",
+      "\0162).com.TigEra.document.definition.EOper" +
+      "Type\022?\n\nFileinfos9\030\t \003(\0132+.com.TigEra.do" +
+      "cument.definition.MsgFileInfo\022\017\n\007OrgID10" +
+      "\030\n \001(\t\022\023\n\013BusiSysId11\030\013 \001(\t\022\024\n\014BusiTypeI" +
+      "d12\030\014 \001(\t\022\021\n\tBarCode13\030\r \001(\t\022\022\n\nSourceIP" +
+      "14\030\016 \001(\t\022\023\n\013MachineID15\030\017 \001(\t\022\022\n\nPasswor" +
+      "d16\030\020 \002(\t\022C\n\014ResultInfo17\030\021 \001(\0132-.com.Ti" +
+      "gEra.document.definition.MsgResultInfo\022\022" +
+      "\n\nEditable18\030\022 \001(\010\022\030\n\020exShenheResult19\030\023" +
+      " \001(\005\022\030\n\020exShenheRemark20\030\024 \001(\t\022\027\n\017Change",
+      "History21\030\025 \001(\t\"B\n\016MsgAccountInfo\022\r\n\005Use" +
+      "r1\030\001 \002(\t\022\021\n\tPassword2\030\002 \002(\t\022\016\n\006OrgID3\030\003 " +
+      "\002(\t\"D\n\016MsgBatchHisQry\022\r\n\005User1\030\001 \002(\t\022\021\n\t" +
+      "Password2\030\002 \002(\t\022\020\n\010BatchNO3\030\003 \002(\t\"\241\001\n\016Ms" +
+      "gBatchHisRsp\022\020\n\010BatchNO1\030\001 \002(\t\022>\n\007Result" +
+      "2\030\002 \002(\0132-.com.TigEra.document.definition" +
+      ".MsgResultInfo\022=\n\007batchs3\030\003 \003(\0132,.com.Ti" +
+      "gEra.document.definition.MsgBatchInfo\"\023\n" +
+      "\021MsgServersListQry\"(\n\021MsgServersListRsp\022" +
+      "\023\n\013serverlist1\030\001 \003(\t\"\022\n\020MsgServerInfoQry",
+      "\"#\n\020MsgServerInfoRsp\022\017\n\007Burden1\030\001 \002(\005*\207\001" +
+      "\n\tEOperType\022\032\n\026eFROM_SERVER_NOTCHANGE\020\000\022" +
+      "\010\n\004eADD\020\001\022\010\n\004eDEL\020\002\022\010\n\004eUPD\020\004\022\014\n\010eUPDNOT" +
+      "E\020\010\022\020\n\014eUPDATEBASIC\020\020\022\017\n\013eUPDATEFILE\020 \022\017" +
+      "\n\013eAlreadyDEL\020@*:\n\nEPrivilege\022\t\n\005eNone\020\000" +
+      "\022\t\n\005eView\020\001\022\013\n\007eUpdate\020\002\022\t\n\005eFull\020\004*;\n\rE" +
+      "ResultStatus\022\014\n\010eSuccess\020\000\022\013\n\007eFailed\020\001\022" +
+      "\017\n\013eOnProgress\020\002B%\n\025cn.net.sinodata.cm.p" +
+      "bB\014ProtoBufInfo"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -17777,13 +18755,13 @@ public final class ProtoBufInfo {
           internal_static_com_TigEra_document_definition_MsgFileInfo_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_TigEra_document_definition_MsgFileInfo_descriptor,
-              new java.lang.String[] { "Author1", "Version2", "CreateDate3", "CreateTime4", "Remark5", "FileName6", "FileURL7", "FileNO8", "FileMD59", "FileSize10", "Data11", "Operation12", "BatchNO13", "Category14", "Notes15", "ExFaPiaoCode16", "Editable18", "ExShenheResult19", "ExShenheRemark20", "LocalPath21", });
+              new java.lang.String[] { "Author1", "Version2", "CreateDate3", "CreateTime4", "Remark5", "FileName6", "FileURL7", "FileNO8", "FileMD59", "FileSize10", "Data11", "Operation12", "BatchNO13", "Category14", "Notes15", "ExFaPiaoCode16", "Editable18", "ExShenheResult19", "ExShenheRemark20", "LocalPath21", "ChangeHistory22", "ThumbnailURL23", });
           internal_static_com_TigEra_document_definition_MsgQueryBatchInfo_descriptor =
             getDescriptor().getMessageTypes().get(3);
           internal_static_com_TigEra_document_definition_MsgQueryBatchInfo_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_TigEra_document_definition_MsgQueryBatchInfo_descriptor,
-              new java.lang.String[] { "User1", "Password2", "OrgID3", "QueryDate4", "QueryTime5", "BatchNO6", "Version7", "SourceIP42", "MachineID44", });
+              new java.lang.String[] { "User1", "Password2", "OrgID3", "QueryDate4", "QueryTime5", "BatchNO6", "Version7", "NeedThumbnail8", "SourceIP42", "MachineID44", });
           internal_static_com_TigEra_document_definition_MsgOptionQueryBatchs_descriptor =
             getDescriptor().getMessageTypes().get(4);
           internal_static_com_TigEra_document_definition_MsgOptionQueryBatchs_fieldAccessorTable = new
@@ -17801,7 +18779,7 @@ public final class ProtoBufInfo {
           internal_static_com_TigEra_document_definition_MsgBatchInfo_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_TigEra_document_definition_MsgBatchInfo_descriptor,
-              new java.lang.String[] { "Author1", "Version2", "CreateDate3", "CreateTime4", "Remark5", "BatchNO6", "Title7", "Operation8", "Fileinfos9", "OrgID10", "BusiSysId11", "BusiTypeId12", "BarCode13", "SourceIP14", "MachineID15", "Password16", "ResultInfo17", "Editable18", "ExShenheResult19", "ExShenheRemark20", });
+              new java.lang.String[] { "Author1", "Version2", "CreateDate3", "CreateTime4", "Remark5", "BatchNO6", "Title7", "Operation8", "Fileinfos9", "OrgID10", "BusiSysId11", "BusiTypeId12", "BarCode13", "SourceIP14", "MachineID15", "Password16", "ResultInfo17", "Editable18", "ExShenheResult19", "ExShenheRemark20", "ChangeHistory21", });
           internal_static_com_TigEra_document_definition_MsgAccountInfo_descriptor =
             getDescriptor().getMessageTypes().get(7);
           internal_static_com_TigEra_document_definition_MsgAccountInfo_fieldAccessorTable = new
@@ -17819,7 +18797,7 @@ public final class ProtoBufInfo {
           internal_static_com_TigEra_document_definition_MsgBatchHisRsp_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_TigEra_document_definition_MsgBatchHisRsp_descriptor,
-              new java.lang.String[] { "Batchs1", });
+              new java.lang.String[] { "BatchNO1", "Result2", "Batchs3", });
           internal_static_com_TigEra_document_definition_MsgServersListQry_descriptor =
             getDescriptor().getMessageTypes().get(10);
           internal_static_com_TigEra_document_definition_MsgServersListQry_fieldAccessorTable = new

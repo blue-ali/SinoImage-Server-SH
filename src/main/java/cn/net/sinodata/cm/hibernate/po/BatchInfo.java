@@ -73,6 +73,12 @@ public class BatchInfo implements Serializable {
 	/** 审核意见 */
 	@Column(name="verify_remark")
 	private String verifyRemark;
+	
+	/** 编辑标识 */
+	@Transient
+	private boolean editable = true;
+	
+	
 	/** 包含的文件，用于持久化 */
 	@Transient
 	private List<FileInfo> fileInfos = new ArrayList<FileInfo>();
@@ -243,6 +249,16 @@ public class BatchInfo implements Serializable {
 	public void setVerifyRemark(String verifyRemark) {
 		this.verifyRemark = verifyRemark;
 	}
+	
+	public boolean isEditable()
+	{
+		return editable;
+	}
+
+	public void setEditable(boolean editable)
+	{
+		this.editable = editable;
+	}
 
 	public static BatchInfo fromNetMsg(MsgBatchInfo input) throws ParseException {
 		BatchInfo batchInfo = new BatchInfo();
@@ -263,7 +279,7 @@ public class BatchInfo implements Serializable {
 		batchInfo.setRemark(input.getRemark5());
 		batchInfo.setVerifyResult(input.getExShenheResult19());
 		batchInfo.setVerifyRemark(input.getExShenheRemark20());
-		
+		batchInfo.setEditable(input.getEditable18());
 		List<MsgFileInfo> mFileInfos = input.getFileinfos9List();
 		if (mFileInfos != null) {
 			for (MsgFileInfo mInfo : mFileInfos) {
@@ -306,6 +322,7 @@ public class BatchInfo implements Serializable {
 		mBuilder.setExShenheResult19(this.getVerifyResult());
 		mBuilder.setExShenheRemark20(this.getVerifyRemark());
 		mBuilder.setOperation8(EOperType.eFROM_SERVER_NOTCHANGE);
+		mBuilder.setEditable18(this.isEditable());
 		// mBuilder.setOperation(this.getOperation());
 		List<FileInfo> fileInfos = this.getFileInfos();
 		if (fileInfos != null) {
