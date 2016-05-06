@@ -81,24 +81,24 @@ public class AddBatchService extends BaseServletService {
 						batchInfo = processFromUpload(item, response);
 					}
 				} else {
-					result.setStatus(EResultStatus.eFailed);
-					result.setMsg("解析请求失败，请求中不包含任何对象");
+					result.get().setStatus(EResultStatus.eFailed);
+					result.get().setMsg("解析请求失败，请求中不包含任何对象");
 				}
 
 			}
 			//TODO 失败处理
 //			boolean res = OtherSysUrl.sendJunkangUrl(batchInfo.getBatchId(), batchInfo.getFileInfos().size());
 //			if(!res){
-//				result.setStatus(EResultStatus.eFailed);
-//				result.setMsg("提交批次失败: 与费控系统通讯失败");
+//				result.get().setStatus(EResultStatus.eFailed);
+//				result.get().setMsg("提交批次失败: 与费控系统通讯失败");
 //			}
 		} catch (Exception e) {
-			result.setStatus(EResultStatus.eFailed);
-			result.setMsg("提交批次失败: " + e.getMessage());
+			result.get().setStatus(EResultStatus.eFailed);
+			result.get().setMsg("提交批次失败: " + e.getMessage());
 			logger.error(e);
 		} finally {
 			response.setCharacterEncoding("UTF-8");
-			result.toNetMsg().writeTo(response.getOutputStream());
+			result.get().toNetMsg().writeTo(response.getOutputStream());
 		}
 	}
 
@@ -114,7 +114,7 @@ public class AddBatchService extends BaseServletService {
 
 			if (batchInfo.isFileDataComplete()) { // 一次上传所有文件
 				manageService.addBatch(batchInfo);
-				result.setStatus(EResultStatus.eSuccess);
+				result.get().setStatus(EResultStatus.eSuccess);
 			} else {
 				// check invoice
 				List<InvoiceInfo> invoiceInfos = manageService.checkInvoice(batchInfo);
@@ -124,14 +124,14 @@ public class AddBatchService extends BaseServletService {
 						sb.append(String.format("发票号码%s，曾在%s,在批次%s由%s已经提交过\r\n", invoiceInfo.getInvoiceNo(),
 								invoiceInfo.getCreatetime(), invoiceInfo.getBatchId(), invoiceInfo.getAuthor()));
 					}
-					result.setStatus(EResultStatus.eFailed);
-					result.setMsg(sb.toString());
+					result.get().setStatus(EResultStatus.eFailed);
+					result.get().setMsg(sb.toString());
 				} else {
 					//更新文件序号，现在控件传过来的文件序号有问题
 					batchInfo.updateFileNo();
 					manageService.addBatchWithoutData(batchInfo); // 批次和文件分别上传
 					batchs.put(batchInfo.getBatchId(), batchInfo);
-					result.setStatus(EResultStatus.eSuccess);
+					result.get().setStatus(EResultStatus.eSuccess);
 				}
 			}
 		} else if (fname.endsWith(OpeMetaFileUtils.PBDataExt)) {
@@ -150,7 +150,7 @@ public class AddBatchService extends BaseServletService {
 			} else {
 				throw new Exception("上传未知批次内容，请重新上传");
 			}
-			result.setStatus(EResultStatus.eSuccess);
+			result.get().setStatus(EResultStatus.eSuccess);
 		} else {
 			// 上传数据内容不对
 			throw new Exception("上传数据内容的扩展名非" + OpeMetaFileUtils.PBDataExt + "或者" + OpeMetaFileUtils.PBOPEEXT + "服务拒绝");
@@ -198,8 +198,8 @@ public class AddBatchService extends BaseServletService {
 	 * _batchinfocache.remove(nbatch.getBatchNO());; }
 	 * 
 	 * } else { nresult = new NResultInfo();
-	 * nresult.setStatus(EResultStatus.eFailed);
-	 * nresult.setMsg("上传未知批次的内容，请重新上传整个批次"); } return nresult; }
+	 * nresult.get().setStatus(EResultStatus.eFailed);
+	 * nresult.get().setMsg("上传未知批次的内容，请重新上传整个批次"); } return nresult; }
 	 */
 
 	public static void main(String[] args) {
