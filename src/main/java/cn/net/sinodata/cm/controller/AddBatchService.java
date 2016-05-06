@@ -87,11 +87,11 @@ public class AddBatchService extends BaseServletService {
 
 			}
 			//TODO 失败处理
-			boolean res = OtherSysUrl.sendJunkangUrl(batchInfo.getBatchId(), batchInfo.getFileInfos().size());
-			if(!res){
-				result.setStatus(EResultStatus.eFailed);
-				result.setMsg("提交批次失败: 与费控系统通讯失败");
-			}
+//			boolean res = OtherSysUrl.sendJunkangUrl(batchInfo.getBatchId(), batchInfo.getFileInfos().size());
+//			if(!res){
+//				result.setStatus(EResultStatus.eFailed);
+//				result.setMsg("提交批次失败: 与费控系统通讯失败");
+//			}
 		} catch (Exception e) {
 			result.setStatus(EResultStatus.eFailed);
 			result.setMsg("提交批次失败: " + e.getMessage());

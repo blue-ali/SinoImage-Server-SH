@@ -271,7 +271,7 @@ public class BatchInfo implements Serializable {
 				batchInfo.getFileInfos().add(fileInfo);
 				
 				if(!Util.isStrEmpty(fileInfo.getInvoiceNo())){
-					if(EOperType.eDEL != fileInfo.getOperation()){
+					if(EOperType.eDEL == fileInfo.getOperation()){
 						batchInfo.getDelInvoiceInfos().add(InvoiceInfo.fromFileInfo(batchInfo, fileInfo));
 					}else{
 						batchInfo.getAddInvoiceInfos().add(InvoiceInfo.fromFileInfo(batchInfo, fileInfo));
@@ -342,6 +342,9 @@ public class BatchInfo implements Serializable {
 				if (fileinfo.isUploaded() != true) {
 					return false;
 				}
+			}
+			if(fileinfo.getOperation() == EOperType.eUPDATEBASIC){
+				return false;
 			}
 		}
 		return true;

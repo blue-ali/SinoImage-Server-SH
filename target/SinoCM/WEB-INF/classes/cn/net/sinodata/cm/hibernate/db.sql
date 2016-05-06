@@ -1,8 +1,50 @@
 DROP TABLE cm_file_info;
-CREATE TABLE cm_file_info ( fileid varchar(20) NOT NULL, batchid varchar(50) NOT NULL, filename varchar(50) NOT NULL, MD5 varchar(100), createtime timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NULL, creator varchar(20), category varchar(2), filesize bigint, PRIMARY KEY (batchid, filename) ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE
+    cm_batch_info
+    (
+        batchid VARCHAR(50) NOT NULL,
+        sysid VARCHAR(20),
+        orgid VARCHAR(20),
+        createtime TIMESTAMP,
+        lastmodified TIMESTAMP,
+        creator VARCHAR(20),
+        version VARCHAR(10) DEFAULT '',
+        provincecode VARCHAR(20),
+        remark VARCHAR(255),
+        verify_result INT,
+        verify_remark VARCHAR(255),
+        PRIMARY KEY (batchid)
+    )
+    ENGINE=InnoDB DEFAULT CHARSET=utf8
 
 DROP TABLE cm_batch_info;
-CREATE TABLE cm_batch_info ( batchid varchar(50) NOT NULL, sysid varchar(20), orgid varchar(20), createtime timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NULL, lastmodified timestamp DEFAULT '0000-00-00 00:00:00' NULL, creator varchar(20), version varchar(10) DEFAULT '""', provincecode varchar(20), remark varchar(255), PRIMARY KEY (batchid) ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE
+    cm_file_info
+    (
+        fileid VARCHAR(20) NOT NULL,
+        batchid VARCHAR(50) NOT NULL,
+        filename VARCHAR(50) NOT NULL,
+        MD5 VARCHAR(100),
+        createtime TIMESTAMP,
+        creator VARCHAR(20),
+        category VARCHAR(2),
+        filesize bigint,
+        verify_result INT,
+        verify_remark VARCHAR(255),
+        invoice_no VARCHAR(20),
+        PRIMARY KEY (batchid, filename)
+    )
+    ENGINE=InnoDB DEFAULT CHARSET=utf8
 
 DROP TABLE cm_invoice_info;
-CREATE TABLE cm_invoice_info ( invoice_no varchar(20) NOT NULL, filename varchar(20), author varchar(20), createtime timestamp NULL, batchid varchar(20), PRIMARY KEY (invoice_no) ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE
+    cm_invoice_info
+    (
+        invoice_no VARCHAR(20) NOT NULL,
+        filename VARCHAR(20),
+        author VARCHAR(20),
+        createtime TIMESTAMP NULL,
+        batchid VARCHAR(20),
+        PRIMARY KEY (invoice_no)
+    )
+    ENGINE=InnoDB DEFAULT CHARSET=utf8

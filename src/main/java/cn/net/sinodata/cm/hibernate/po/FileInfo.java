@@ -72,7 +72,7 @@ public class FileInfo implements Serializable{
 	private String fileUrl;
 	@Transient
 	private EOperType operation;
-	@Transient
+	@Column(name="invoice_no")
 	private String invoiceNo="";
 	
 	@Transient
@@ -244,6 +244,7 @@ public class FileInfo implements Serializable{
 		mBuilder.setCategory14(this.getCategory());
 		mBuilder.setExShenheResult19(this.getVerifyResult());
 		mBuilder.setExShenheRemark20(this.getVerifyRemark());
+		mBuilder.setExFaPiaoCode16(this.getInvoiceNo());
 		if (this.getData() != null)	{
 			mBuilder.setData11(ByteString.copyFrom(this.getData()));
 		}
@@ -279,6 +280,7 @@ public class FileInfo implements Serializable{
 		fileInfo.setFileUrl(input.getFileURL7());
 		fileInfo.setVerifyResult(input.getExShenheResult19());
 		fileInfo.setVerifyRemark(input.getExShenheRemark20());
+		fileInfo.setInvoiceNo(input.getExFaPiaoCode16());
 		if (input.getData11() != null)
 		{
 			fileInfo.setData(input.getData11().toByteArray());

@@ -59,7 +59,7 @@
 				$("#dealImgList").val("");
 				//alert($("#dealImgList").val()+"555555555");
 			} else{
-				var writeFile;
+				var writeFile='';
 				var writeFileList;
 				for(var i=0;i<fileid.length;i++){
 					var fileval1 = fileid.eq(i).html();
@@ -74,7 +74,7 @@
 					}else{
 						remark = "03";
 					}
-					writeFile = fileval1 + "|" +remark;
+					writeFile = writeFile + fileval1 + "|" +remark;
 					if(i != fileid.length){
 						writeFile = writeFile + ",";
 					}
@@ -401,7 +401,7 @@
 	<input type="hidden" id="dealBatchNo" name="dealBatchNo" value="" />
 	<input type="hidden" id="dealImgList" name="dealImgList" value="" />
 	
-	<br/>
+	<br/> 
 	<center>
 	<input type="button" id="remarksubmit" value="提交" />&nbsp;&nbsp;
 	<input type="button" id="deletesubmit" value="重置" />

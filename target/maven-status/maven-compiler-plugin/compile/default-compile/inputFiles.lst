@@ -32,8 +32,10 @@ C:\Workspace\space_chinapost_image\SinoImage-Server-SH\src\main\java\cn\net\sino
 C:\Workspace\space_chinapost_image\SinoImage-Server-SH\src\main\java\cn\net\sinodata\cm\content\ProxyContentServiceBean.java
 C:\Workspace\space_chinapost_image\SinoImage-Server-SH\src\main\java\cn\net\sinodata\cm\util\SpringUtil.java
 C:\Workspace\space_chinapost_image\SinoImage-Server-SH\src\main\java\cn\net\sinodata\framework\exception\message\ExceptionID.java
+C:\Workspace\space_chinapost_image\SinoImage-Server-SH\src\main\java\cn\net\sinodata\cm\hibernate\dao\BatchLogDao.java
 C:\Workspace\space_chinapost_image\SinoImage-Server-SH\src\main\java\cn\net\sinodata\framework\base\dao\SinoBaseDao.java
 C:\Workspace\space_chinapost_image\SinoImage-Server-SH\src\main\java\cn\net\sinodata\cm\init\InitializeService.java
+C:\Workspace\space_chinapost_image\SinoImage-Server-SH\src\main\java\cn\net\sinodata\cm\hibernate\po\BatchLogInfo.java
 C:\Workspace\space_chinapost_image\SinoImage-Server-SH\src\main\java\cn\net\sinodata\cm\util\JsonUtil.java
 C:\Workspace\space_chinapost_image\SinoImage-Server-SH\src\main\java\cn\net\sinodata\framework\log\library\LoggerName.java
 C:\Workspace\space_chinapost_image\SinoImage-Server-SH\src\main\java\cn\net\sinodata\cm\controller\GetBatchForWebService.java
@@ -55,6 +57,7 @@ C:\Workspace\space_chinapost_image\SinoImage-Server-SH\src\main\java\cn\net\sino
 C:\Workspace\space_chinapost_image\SinoImage-Server-SH\src\main\java\cn\net\sinodata\framework\exception\message\ExceptionIDs.java
 C:\Workspace\space_chinapost_image\SinoImage-Server-SH\src\main\java\cn\net\sinodata\cm\util\XMLHandler.java
 C:\Workspace\space_chinapost_image\SinoImage-Server-SH\src\main\java\cn\net\sinodata\framework\log\library\Log4JLogger.java
+C:\Workspace\space_chinapost_image\SinoImage-Server-SH\src\main\java\cn\net\sinodata\cm\hibernate\po\FileLogInfo.java
 C:\Workspace\space_chinapost_image\SinoImage-Server-SH\src\main\java\cn\net\sinodata\cm\util\MD5.java
 C:\Workspace\space_chinapost_image\SinoImage-Server-SH\src\main\java\cn\net\sinodata\cm\util\db\DbConfigBean.java
 C:\Workspace\space_chinapost_image\SinoImage-Server-SH\src\main\java\cn\net\sinodata\framework\util\AssertUtil.java
@@ -76,4 +79,5 @@ C:\Workspace\space_chinapost_image\SinoImage-Server-SH\src\main\java\cn\net\sino
 C:\Workspace\space_chinapost_image\SinoImage-Server-SH\src\main\java\cn\net\sinodata\cm\response\ResponseMsgLoad.java
 C:\Workspace\space_chinapost_image\SinoImage-Server-SH\src\main\java\cn\net\sinodata\cm\util\EntityUtil.java
 C:\Workspace\space_chinapost_image\SinoImage-Server-SH\src\main\java\cn\net\sinodata\framework\util\ObjectUtil.java
+C:\Workspace\space_chinapost_image\SinoImage-Server-SH\src\main\java\cn\net\sinodata\cm\httpurl\OtherSysUrl.java
 C:\Workspace\space_chinapost_image\SinoImage-Server-SH\src\main\java\cn\net\sinodata\cm\service\impl\ContentManageServiceImpl.java

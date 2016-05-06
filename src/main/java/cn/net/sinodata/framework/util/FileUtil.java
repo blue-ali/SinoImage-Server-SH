@@ -117,8 +117,9 @@ public class FileUtil {
 		}
 	}
 
-	public static void deleteFile(String string) {
-		
+	public static void deleteFile(String path) {
+		File file = new File(path);
+		file.delete();
 	}
 	
 	public static boolean isFileExists(String path){

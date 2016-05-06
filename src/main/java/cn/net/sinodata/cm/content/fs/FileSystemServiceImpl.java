@@ -138,6 +138,9 @@ public class FileSystemServiceImpl extends BaseContentService{
 	public void updContent(BatchInfo batchInfo, FileInfo fileInfo) throws Exception {
 		String path = buildPath(batchInfo);
 		ensureFolder(path, true);
+		if(fileInfo.getOperation() == EOperType.eDEL){
+			FileUtil.deleteFile(path + File.separator + fileInfo.getFileName());
+		}
 		FileUtil.byte2file(fileInfo.getData(), path, fileInfo.getFileName());
 	}
 
@@ -147,7 +150,7 @@ public class FileSystemServiceImpl extends BaseContentService{
 		ensureFolder(path, true);
 //		List<FileInfo> fileInfos = batchInfo.getFileInfos();
 		for (FileInfo fileInfo : delFiles) {
-			File file = new File(path + fileInfo.getFileName());
+			File file = new File(path + File.separator + fileInfo.getFileName());
 			if(file.exists())
 				file.delete();
 		}
